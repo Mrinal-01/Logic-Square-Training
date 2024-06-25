@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Show Text</title>
+</head>
+<body>
+    <div>
+        <h2>Write Something</h2>
+        <input type="text" id="input-data" placeholder="Write Something" autocomplete="off">
+        <input type="submit" value="Show" onclick=showResult() ><br>
+        <p id="show-data" style="color: rgb(192, 103, 199);"></p>
+    </div>
+    <script>
+        
+        function showResult(){
+        let value=document.getElementById('input-data').value
+        document.getElementById('show-data').innerHTML='Result:- '+value
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div>
+        <h2>Enter The Numbers</h2>
+        <input type="text" id="number" placeholder="Enter number">
+        <input type="submit" value="Shuffle" onclick=shuffle()>
+        <p id="shuffle"></p>
+
+        <!-- <h2>Enter The Numbers</h2>
+        <input type="text" id="number2" placeholder="Enter number"> -->
+        <input type="submit" value="Count" onclick=countNumber()>
+        <p id="count"></p>
+    </div>
+
+
+    <script>
+        //Global Varibale for the shuffled No
+        let shuffleNo;
+        function shuffle() {
+            let n = document.getElementById('number').value
+            //Converts all the no to words means to string
+            let number = n.replaceAll('0', 'zero').replaceAll('1', 'one')
+                .replaceAll('2', 'two').replaceAll('3', 'three').replaceAll('4', 'four')
+                .replaceAll('5', 'five').replaceAll('6', 'six').replaceAll('7', 'seven')
+                .replaceAll('8', 'eight').replaceAll('9', 'nine')
+
+
+            //Shuffle all the charecters
+            let arr = number.split('')
+            for (let i = 0; i < number.length - 1; i++) {
+                //Its taking random no which will swap with indexes
+                let j = Math.floor(Math.random() * (number.length))
+
+                //Swaped the array elements with random indexes
+                let temp = arr[i]
+                arr[i] = arr[j]
+                arr[j] = temp
+
+                // [arr[i],arr[j]]=[arr[j],arr[i]]
+            }
+            shuffleNo = arr.join('')
+
+            document.getElementById('shuffle').innerHTML = "Shuffled Value is: " + shuffleNo
+
+        }
+        function countNumber() {
+            function countOccurrences(str) {
+                const charCount = {};
+
+                for (let i = 0; i < str.length; i++) {
+                    const char = str.charAt(i);
+                    if (charCount[char]) {
+                        charCount[char]++;
+                    } else {
+                        charCount[char] = 1;
+                    }
+                }
+
+                return charCount;
+            }
+
+            // Example usage:
+            const occurrences = countOccurrences(shuffleNo);
+
+            // console.log(occurrences);
+            let checkLetter = ["z", "w", "u", "x", "g", "o", "h", "f", "s", "i", "e"]
+
+            const count = {}
+            checkLetter.forEach((el, indx) => {
+                if (el === "z") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+                        count.zero = occurrences[el]
+                        occurrences["e"] -= occurrences[el]
+                        occurrences["r"] -= occurrences[el]
+                        occurrences["o"] -= occurrences[el]
+                        occurrences[el] = 0
+                    } else {
+
+                        count.zero = 0
+                    }
+                }
+                if (el === "w") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.two = occurrences[el]
+                        occurrences["t"] -= occurrences[el]
+                        occurrences["o"] -= occurrences[el]
+                        occurrences[el] = 0
+                    } else {
+
+                        count.two = 0
+                    }
+                }
+                if (el === "u") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.four = occurrences[el]
+                        occurrences["o"] -= occurrences[el]
+                        occurrences["f"] -= occurrences[el]
+                        occurrences["r"] -= occurrences[el]
+                        occurrences[el] = 0
+                    } else {
+
+                        count.four = 0
+                    }
+                }
+                if (el === "x") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.six = occurrences[el]
+                        occurrences["i"] -= occurrences[el]
+                        occurrences["s"] -= occurrences[el]
+                        occurrences[el] = 0
+                    } else {
+
+                        count.six = 0
+                    }
+                }
+                if (el === "g") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.eight = occurrences[el]
+                        occurrences["i"] -= occurrences[el]
+                        occurrences["h"] -= occurrences[el]
+                        occurrences["e"] -= occurrences[el]
+                        occurrences["t"] -= occurrences[el]
+                        occurrences[el] = 0
+                    } else {
+
+                        count.eight = 0
+                    }
+                }
+                if (el === "o") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.one = occurrences[el]
+                        occurrences["n"] -= occurrences[el]
+                        occurrences["e"] -= occurrences[el]
+
+                        occurrences[el] = 0
+                    } else {
+
+                        count.one = 0
+                    }
+                }
+                if (el === "h") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.three = occurrences[el]
+                        occurrences["t"] -= occurrences[el]
+                        occurrences["e"] -= occurrences[el] * 2
+                        occurrences["r"] -= occurrences[el]
+
+                        occurrences[el] = 0
+                    } else {
+
+                        count.three = 0
+                    }
+                }
+                if (el === "f") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.five = occurrences[el]
+                        occurrences["i"] -= occurrences[el]
+                        occurrences["e"] -= occurrences[el]
+                        occurrences["v"] -= occurrences[el]
+
+                        occurrences[el] = 0
+                    } else {
+
+                        count.five = 0
+                    }
+                }
+                if (el === "s") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.seven = occurrences[el]
+                        occurrences["n"] -= occurrences[el]
+                        occurrences["e"] -= occurrences[el] * 2
+                        occurrences["v"] -= occurrences[el]
+
+                        occurrences[el] = 0
+                    } else {
+
+                        count.seven = 0
+                    }
+                }
+                if (el === "i") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.nine = occurrences[el]
+                        occurrences["n"] -= occurrences[el]
+                        occurrences["e"] -= occurrences[el]
+                        // occurrences["e"] -= occurrences[el]
+
+
+                        occurrences[el] = 0
+                    } else {
+
+                        count.nine = 0
+                    }
+
+
+                }
+                if (el === "e") {
+                    if (occurrences[el] !== undefined && occurrences[el] !== 0) {
+
+                        count.ten = occurrences[el]
+                        occurrences["t"] -= occurrences[el]
+                        occurrences["n"] -= occurrences[el]
+
+                        occurrences[el] = 0
+                    } else {
+
+                        count.ten = 0
+                    }
+                }
+
+            })
+            // console.log(count)
+
+
+            const objectDetailsPre = document.getElementById('count');
+            objectDetailsPre.textContent = JSON.stringify(count);
+
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>

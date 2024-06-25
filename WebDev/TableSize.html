@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table, th, td{
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        tr:nth-child(odd){
+            background-color: rgb(151, 212, 86);
+        }
+
+        td:nth-child(odd){
+            background-color: blueviolet;
+        }
+        th:nth-child(odd){
+            background-color: aqua;
+        }
+    </style>
+</head>
+<body>
+    <table style="width: 100%;">
+        <caption>Employee Details</caption>
+        <tr >
+            <th >FirstName</th>
+            <th >LastName</th>
+            <th>Age</th>
+        </tr>
+        <tr >
+            <td>Jill</td>
+            <td>Smith</td>
+            <td>25</td>
+        </tr>
+        <tr>
+            <td>James</td>
+            <td>Walker</td>
+            <td>30</td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digit to Word Conversion, Shuffle, and Count</title>
+</head>
+<body>
+  <form id="numberForm">
+    <label for="bigNumber">Enter a big number:</label>
+    <input type="text" id="bigNumber" name="bigNumber" required>
+    <button type="button" onclick="processNumber()">Process Number</button>
+  </form>
+  
+  <div id="result"></div>
+
+  <script>
+    function processNumber() {
+      const inputNumber = document.getElementById('bigNumber').value.trim();
+      if (!inputNumber.match(/^\d+$/)) {
+        alert('Please enter a valid big number (digits only).');
+        return;
+      }
+
+      // Step 1: Convert each digit to corresponding words and concatenate without spaces (lowercase)
+      const digitToWordMap = {
+        '0': 'zero', '1': 'one', '2': 'two', '3': 'three', '4': 'four',
+        '5': 'five', '6': 'six', '7': 'seven', '8': 'eight', '9': 'nine'
+      };
+      let words = '';
+      for (let i = 0; i < inputNumber.length; i++) {
+        const digit = inputNumber.charAt(i);
+        words += digitToWordMap[digit];
+      }
+
+      // Step 2: Shuffle the characters of the string
+      let shuffledString = shuffleString(words);
+
+      // Step 3: Count occurrences of each digit in the shuffled string
+      const digitCounts = countDigits(shuffledString);
+
+      // Display results
+      const resultDiv = document.getElementById('result');
+      resultDiv.innerHTML = `
+        <p><strong>Converted to words:</strong> ${words}</p>
+        <p><strong>Shuffled string:</strong> ${shuffledString}</p>
+        <p><strong>Digit counts in shuffled string:</strong></p>
+        <ul>
+          ${Object.keys(digitCounts).map(digit => `<li>${digit}: ${digitCounts[digit]}</li>`).join('')}
+        </ul>
+      `;
+    }
+
+    function shuffleString(str) {
+      const array = str.split('');
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array.join('');
+    }
+
+    function countDigits(str) {
+      const digitCounts = {};
+      const digits = '0123456789';
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charAt(i);
+        if (digits.includes(char)) {
+          if (digitCounts[char]) {
+            digitCounts[char]++;
+          } else {
+            digitCounts[char] = 1;
+          }
+        }
+      }
+      return digitCounts;
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+1. lang:- Used to specify language of the html page. also we can add country code
+       <html lang='en-US'>
+
+2. 9874891230

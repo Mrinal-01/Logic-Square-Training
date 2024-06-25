@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>The local variable mobName cannot be accessed from 
+        code outside the function
+    </p>
+    <p id="demo"></p>
+    <script>
+        //Global Variable
+        // var mobName="Samsung"
+        // myFunc()
+        // function myFunc(){
+        //     document.getElementById('demo').innerHTML=
+        // "I can display "+mobName
+        // }
+
+        //Automatic global
+            myFunc()
+        document.getElementById('demo').innerHTML=
+            "I can display "+mobName
+        function myFunc(){
+            mobName='Samsung'
+        }
+    </script>
+</body>
+</html>

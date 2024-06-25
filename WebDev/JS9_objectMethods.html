@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Creating and using an object method</p>
+    <p id="demo"></p>
+    <script>
+        var person={
+            fname:'Sweta',
+            lname:'Kumari',
+            id:5566,
+            fullname:function(){
+                return this.fname+" "+this.lname;
+            }
+        }
+        document.getElementById('demo').innerHTML=person.fullname()
+    </script>
+</body>
+</html>
