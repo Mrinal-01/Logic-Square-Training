@@ -1,0 +1,73 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <style>
+        body, html{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 50%;
+        
+        }
+        
+        div{
+            height: 100px;
+            width: 300px;
+            text-align: center;
+            
+        }
+        .div1{
+
+            background-color: aqua;
+            
+        }
+        .div2{
+            background-color: rgb(216, 88, 201);
+            
+        }
+        .div3{
+
+            background-color: aqua;
+
+                }
+        .div4{
+        background-color: rgb(216, 88, 201);
+
+                }
+
+    </style>
+</head>
+<body>
+    <div>
+        <div class="div1">
+            Home
+        </div>
+        <div class="div2">
+            Jquery
+        </div>
+        <div class="div3">
+            CSS
+        </div>
+        <div class="div4">
+            HTML
+        </div>
+        <h1>Swap Color</h1>
+    </div>
+    <script>
+            $(document).ready(function(){
+                $('body').on('keypress',(event)=>{
+                    if(event.keyCode==13){
+                        $('.div1').removeClass('div1').addClass('div2');
+                        $('.div2').removeClass('div2').addClass('div1');
+                       
+                    }
+                })
+            })
+    </script>
+</body>
+</html>
+

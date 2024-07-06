@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+
+<style>
+#myVideo 
+{
+    position:fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%; 
+    min-height: 100%;
+    z-index:0;
+}
+
+
+audio
+{
+        display:none;
+}
+
+.letter
+{
+    display:none;
+    position:relative;
+    top:20px;
+    left:40px;
+    font-family: 'Lobster', cursive; 
+    color:rgb(135, 223, 230);
+    font-size:50px;
+}
+
+    
+</style>
+</head>
+
+<body>
+
+<audio controls autoplay="true" loop src="./MountainAudio.mp3">
+    
+</audio>
+
+<video controls autoplay loop id="myVideo" src="./CherryVideo.mp4">
+  
+</video>
+
+<span class="letter">W</span><span class="letter">e</span><span class="letter">l</span><span class="letter">c</span>
+<span class="letter">o</span><span class="letter">m</span><span class="letter">e</span> <span class="letter">&nbsp;</span>
+
+<span class="letter">t</span><span class="letter">o</span> <span class="letter">&nbsp;</span>
+
+<span class="letter">t</span><span class="letter">h</span><span class="letter">e</span> <span class="letter">&nbsp;</span>
+
+<span class="letter">C</span><span class="letter">h</span><span class="letter">e</span><span class="letter">r</span><span class="letter">r</span><span class="letter">y</span> <span class="letter">&nbsp;</span>
+
+<span class="letter">B</span><span class="letter">l</span><span class="letter">o</span><span class="letter">s</span><span class="letter">s</span><span class="letter">o</span><span class="letter">m</span> <span class="letter">&nbsp;</span>
+    
+<span class="letter">F</span><span class="letter">e</span><span class="letter">s</span><span class="letter">t</span><span class="letter">i</span><span class="letter">v</span><span class="letter">a</span><span class="letter">l</span>
+
+    <h1></h1> 
+        
+<script>
+$(document).ready(function() 
+{
+        
+    $("span").each(function(index) 
+    {
+        $(this).delay(1000*index).fadeIn(1000);
+    });
+    
+});
+
+$(document).click(function() 
+{
+    $('video').remove();
+    $('body').css('background-image', 'url(cheery.jpg)');
+    $('body').css('background-size', 'cover');
+    $('h1').text("The Festival was founded 40 years ago in appreciation of 1,000 cherry trees gifted to Seattle by Prime Minister Takeo Miki on behalf of the Japanese government in commemoration of the nation's bicentennial. It is the first ethnic festival to be held at Seattle Center annually and the oldest in the Seattle Center Festál series.");
+    $('h1').css('color','pink');
+    
+    $("span").each(function(index) 
+    {
+        $(this).delay(1000*index).fadeOut(1000);
+    });
+    
+});
+</script>
+
+</body>
+</html>

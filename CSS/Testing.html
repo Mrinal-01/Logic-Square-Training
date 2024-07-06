@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Four Squares Example</title>
+<style>
+  /* CSS for the container and squares */
+  .container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    height: 50vh; /* Adjust as needed */
+  }
+  
+  .square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2em;
+    color: white;
+  }
+
+  /* Define colors for each square */
+  .square:nth-child(1) { background-color: #3498db; } /* Blue */
+  .square:nth-child(2) { background-color: #e74c3c; } /* Red */
+  .square:nth-child(3) { background-color: #2ecc71; } /* Green */
+  .square:nth-child(4) { background-color: #f39c12; } /* Orange */
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="square">1</div>
+    <div class="square">2</div>
+    <div class="square">3</div>
+    <div class="square">4</div>
+  </div>
+</body>
+</html>

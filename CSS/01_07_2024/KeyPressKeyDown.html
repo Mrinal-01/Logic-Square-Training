@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        .hidden{
+            display: none;
+        }
+        h1{
+            color: white;
+            text-align: center;
+            font-size: 50px;
+        }
+        body{
+            background:url(./Background_image.avif);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+    </style>
+</head>
+<body onkeydown="addBackground(event)">
+    <section class="welcome-screen">
+        <h1>Welcome to the Most Amazing Places</h1>
+        <h1>Press Enter to continue</h1>
+    </section>
+    <div class="main hidden">
+        <h1>Do you like this picture? Type Y/N</h1>
+    </div>
+    <script>
+        function addBackground(event){
+            console.log(event.keyCode);
+            if(event.keyCode==13){
+                $('.welcome-screen').addClass('hidden')
+                $('.main').removeClass('hidden')
+            }
+            if(event.keyCode==89){
+                $('body').css('background-image','url(Background_image2.jpg)')
+            }
+            if(event.keyCode==78){
+                $('body').css('background-image','none')
+                $('body').css('background-color','aqua')
+                $('h1').text("Sorry!")
+            }
+        }
+    </script>
+</body>
+</html>

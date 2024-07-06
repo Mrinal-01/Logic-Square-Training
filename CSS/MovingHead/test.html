@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Head Matching Game</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        .show-head {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-left: 2px;
+        }
+
+        .show-body {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .show-head img {
+            animation: rotation 4s infinite linear;
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main">
+        <div class="show-head">
+            <img id="rotate" src="./Images/HeadWhite-removebg-preview.png" width="500px" alt="Head">
+        </div>
+        <div class="show-body">
+            <img src="./Images/BodyWhite.png" width="500px" alt="Body">
+        </div>
+    </div>
+
+    <script>
+        let movingImg = document.getElementById('rotate');
+        let isMoving = true;
+        let startRotationAngle = 0;
+        let pausedRotationAngle = 0;
+
+        function updateRotation() {
+            if (isMoving) {
+                movingImg.style.animationPlayState = 'running';
+                movingImg.style.transform = `rotate(${startRotationAngle}deg)`;
+            } else {
+                movingImg.style.animationPlayState = 'paused';
+                pausedRotationAngle = startRotationAngle;
+                console.log('Rotation stopped. Percentage of match:', calculateRotationPercentage(), '%');
+            }
+        }
+
+        function calculateRotationPercentage() {
+            const currentRotation = pausedRotationAngle % 360;
+            const percentage = (currentRotation / 360) * 100;
+            return percentage.toFixed(2);
+        }
+
+        document.addEventListener('keydown', function(event) {
+            if (event.code === 'Space') {
+                isMoving = !isMoving;
+                updateRotation();
+            }
+        });
+
+        // Listen for animation end to update rotation angle
+        movingImg.addEventListener('animationiteration', function() {
+            startRotationAngle += 360;
+        });
+    </script>
+</body>
+</html>

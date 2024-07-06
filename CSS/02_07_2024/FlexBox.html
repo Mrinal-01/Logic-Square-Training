@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .flex-container{
+            display: flex;
+            background-color: dodgerblue;
+            /* flex-direction: column; */
+            /* flex-direction: column-reverse; */
+            /* flex-direction: row; */
+            /* flex-direction: row-reverse; */
+           
+            /* flex-wrap: wrap; */
+            /* flex-wrap: nowrap; */
+            /* flex-wrap: wrap-reverse; */
+
+            /* flex-flow: row wrap; */
+            /* justify-content: center; */
+            /* justify-content: flex-start; */
+            /* justify-content: flex-end; */
+            /* justify-content: space-around; */
+            /* justify-content: space-between; */
+            /* justify-content: space-evenly; */
+
+            /* height: 200px; */
+            /* align-items: flex-start; */
+            /* align-items: flex-end; */
+            /* align-items: stretch; */
+            /* align-items: baseline; */
+
+
+            /* height: 600px;
+            flex-wrap: wrap; */
+            /* align-content: space-around; */
+            /* align-content: stretch; */
+            /* align-content: center; */
+            /* align-content: flex-start; */
+
+
+            /* height: 300px;
+            justify-content: center;
+            align-items: center; */
+
+            /* height: 100vh; */
+            /* height: 200px; */
+            /* flex-wrap: wrap; */
+            /* align-content: space-between; */
+            /* align-content: space-around; */
+            /* align-content: stretch; */
+            /* align-content: center;
+            justify-content: center;
+            gap: 1rem; */
+            
+
+            display: flex;
+            height: 200px;
+            background-color: #f1f1f1;
+            
+        }
+        .flex-container > *{
+            /* background-color: #f1f1f1;
+            width: 100px; */
+            /* margin: 10px; */
+            /* padding: 20px;
+            line-height: 75px;
+            font-size: 30px;
+            text-align: center; */
+            /* border-radius: 50%;
+            background: radial-gradient(rgb(124, 218, 218),rgb(221, 127, 127)); */
+
+
+    background-color: DodgerBlue;
+  color: white;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Create a Flex Box</h1>
+    <div class="flex-container">
+        <!-- <div style="order:3">1</div>
+        <div style="order:4">2</div>
+        <div style="order:2">3</div>
+        <div style="order:1">4</div> -->
+        <!-- <div style="flex: 0 0 200px">5</div> -->
+        <div>6</div>
+        <div style="align-self: center;">7</div>
+        <div>8</div>
+        <div>9</div>
+        <div>10</div>
+        <div>11</div>
+        <div>12</div>
+       
+    </div>
+    <p>A Flexible Layout must have a parent element with the <em>display</em> property set to <em>flex</em>.</p>
+
+    <p>Direct child elements(s) of the flexible container automatically becomes flexible items.</p>
+</body>
+</html>

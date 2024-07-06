@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CherryBloosom</title> <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+    <style>
+        #myVideo{
+            position: fixed;
+            z-index: 0;
+            bottom: 0;
+            min-height: 100%;
+            min-width: 100%;
+
+        }
+        audio{
+            display: none;
+        }
+        h1{
+            position: absolute;
+            z-index: 1;
+            font-family: 'sofia',cursive;
+            color: fuchsia;
+        }
+    </style>
+</head>
+<body>
+    <audio  autoplay="true" loop src="./MountainAudio.mp3">
+        <!-- <source src="./MountainAudio.mp3" type="audio"> -->
+    </audio>
+    <video autoplay muted loop id="myVideo" src="./CherryVideo.mp4">
+        <!-- <source src="./CherryVideo.mp4" type="video"> -->
+    </video>
+
+    <h1>Welcome to the Cherry Blossom Festival</h1>
+    <script>
+        $(document).click(function(){
+            $('video').remove();
+            $('body').css('background-image','url(cherryImage.jpg)')
+            $('body').css('background-size','cover');
+            $('h1').text("The Cherry Blossom Festival, celebrated primarily in Japan and increasingly in other countries, heralds the arrival of spring with the blooming of cherry trees. This annual event is marked by hanami, the tradition of gathering under blooming cherry trees to appreciate their fleeting beauty. Families and friends often enjoy picnics beneath the delicate pink and white blossoms, symbolizing renewal and the ephemeral nature of life. The festival holds deep cultural significance, reflecting themes of harmony, nature's beauty, and the passage of time in Japanese society. Across the world, the festival has become a symbol of cross-cultural exchange and appreciation for Japanese traditions, drawing tourists and enthusiasts alike to witness this natural spectacle.")
+        })
+    </script>
+</body>
+</html>

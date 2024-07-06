@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SlideToggle</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+    <style>
+        body
+        {
+            background-color: aliceblue;
+        }
+        #myVideo{
+            position: fixed;
+            top: 25%;
+            right: 0;
+            bottom: 10%;
+            min-width: 100%;
+            min-height: 100%;
+        }
+        .hidden{
+            display: none;
+        }
+        h1{
+            text-align: center;
+            font-family: 'Lobster',cursive;
+            color: skyblue;
+        }
+        #panel{
+            background-color: aliceblue;
+            font-size: 20px;
+            font-family: 'Lobster',cursive;
+            color: cadetblue;
+
+        }
+        button{
+            margin: auto;
+            display: block;
+            width: 300px;
+            font-family: 'Lobster',cursive;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <audio src="./MountainAudio.mp3" controls autoplay="true" class="hidden">
+     </audio>
+     <video src="./MountainVideo.mp4" autoplay loop id="myVideo">
+     </video>
+     <h1 class="hidden">Welcome to the mountain!!!</h1>
+     <button class="hidden">Learn More</button>
+     <div id="panel" class="hidden">
+        India boasts a diverse array of mountains, from the mighty Himalayas 
+        in the north, home to the world's highest peaks, to the Western Ghats 
+        and Eastern Ghats, offering lush greenery and biodiversity.
+         These mountains are not only scenic but hold cultural and 
+        spiritual significance, attracting adventurers and pilgrims alike.
+     </div>
+     <script>
+        $(document).ready(function(){
+            $('h1').fadeIn(6000)
+            $('button').fadeIn(6000)
+        })
+        $('button').click(function(){
+            // $('#panel').slideToggle('slow')
+            $('#panel').toggle('slow')
+        })
+     </script>
+</body>
+</html>

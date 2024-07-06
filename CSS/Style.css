@@ -1,0 +1,23 @@
+
+p.center{
+    text-align:center;
+    color: blueviolet;
+}
+.h1{
+    border: 2px solid rgb(146, 207, 223);
+    text-align: center;
+}
+.h2{
+    border: 2px dotted rgb(237, 106, 206);
+    text-align: center;
+}
+.h3{
+    border: 2px dashed rgb(179, 239, 147);
+    text-align: center;
+}
+.back-img{
+    border: 2px solid skyblue;
+    padding: 100px 30px 30px 30px;
+    background-image:url('../Images/pexels-padrinan-255379.jpg');
+    background-repeat:no-repeat;
+}

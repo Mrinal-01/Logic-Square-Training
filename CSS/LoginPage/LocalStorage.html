@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+<script>
+    const userObj = {
+  username : "Maria",
+  email: "maria@mail.com"
+}
+
+localStorage.setItem('user', JSON.stringify(userObj))
+
+
+const storedUserData = localStorage.getItem('user')
+
+if (storedUserData) {
+  const userData = JSON.parse(storedUserData)
+  console.log(userData.username);
+  // You can use userData here...
+} else {
+  console.log('User data not found in local storage')
+}
+</script>
+</html>

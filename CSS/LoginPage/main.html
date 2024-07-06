@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            background-image: url(./Images/Texture.jpg);
+        }
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit:fill;
+            margin-bottom: 20px;
+        }
+        .info {
+            margin: 10px 0;
+        }
+        .log-out{
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 1rem;
+            border-color: aqua;
+            color: rgb(174, 46, 46);
+        }
+        .log-out:hover{
+            background-color: rgb(234, 184, 186);
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="profile.jpg" alt="Profile Image" class="profile-img" id="profileImage">
+        <div class="info" id="username">Username: JohnDoe</div>
+        <div class="info" id="email">Email: johndoe@example.com</div>
+        <div class="info" id="loginDate">Login Date: 2024-07-05</div>
+        <div class="info" id="loginTime">Login Time: 2024-07-05</div>
+        <div><input type="button" value="Log Out" class="log-out" onclick="logOut()"></div>
+    </div>
+   
+    
+    
+    <script>
+
+        // const users=localStorage.getItem('user')
+        const storedUserData = localStorage.getItem('currentUser')
+
+        
+        const users = JSON.parse(storedUserData)
+        
+        // // Populate the data
+        document.getElementById('username').innerText = `Username: ${users.Name}`;
+        document.getElementById('email').innerText = `Email: ${users.username}`;
+        document.getElementById('loginDate').innerText = `Login Date: ${new Date().toLocaleDateString()} `;
+        document.getElementById('loginTime').innerText = `Login Time: ${new Date().toLocaleTimeString()} `;
+        document.getElementById('profileImage').src = users.profileImage;
+
+        function logOut(){
+            window.location.href='./index.html'
+        }
+    </script>
+</body>
+</html>
