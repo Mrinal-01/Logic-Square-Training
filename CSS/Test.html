@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coin and Navigation Example</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #f4f4f4;
+    position: relative;
+}
+
+.nav-container {
+    position: relative;
+}
+
+.hamburger {
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#nav-menu.hidden {
+    display: none;
+}
+
+#nav-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    background: linear-gradient(to right, #ff7e5f, #feb47b);
+    border-radius: 5px;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#nav-menu ul li {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#nav-menu ul li:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.top-right {
+    display: flex;
+    align-items: center;
+}
+
+.coin-icon {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+}
+
+#date {
+    font-size: 18px;
+}
+
+
+        /* body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            background-image: url(./Images/Texture.jpg);
+        } */
+        .container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            background-image: url(./Images/Texture.jpg);
+        }
+        .profile-img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit:fill;
+            margin-bottom: 20px;
+        }
+        .info {
+            margin: 10px 0;
+        }
+        .log-out{
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 1rem;
+            border-color: aqua;
+            color: rgb(174, 46, 46);
+        }
+        .log-out:hover{
+            background-color: rgb(234, 184, 186);
+            
+        }
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nav-container">
+            <div class="hamburger" id="hamburger">&#9776;</div>
+            <nav id="nav-menu" class="hidden">
+                <ul>
+                    <li>Game 1</li>
+                    <li>Game 2</li>
+                    <li>Game 3</li>
+                    <li>Game 4</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="top-right">
+            <img src="coin-icon.png" alt="Coin Icon" class="coin-icon">
+            <span id="date"></span>
+        </div>
+    </header>
+
+    <div class="container">
+        <img src="profile.jpg" alt="Profile Image" class="profile-img" id="profileImage">
+        <div class="info" id="username">Username: JohnDoe</div>
+        <div class="info" id="email">Email: johndoe@example.com</div>
+        <div class="info" id="loginDate">Login Date: 2024-07-05</div>
+        <div class="info" id="loginTime">Login Time: 2024-07-05</div>
+        <div><input type="button" value="Log Out" class="log-out" onclick="logOut()"></div>
+    </div>
+
+
+    <script >
+        document.addEventListener('DOMContentLoaded', () => {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    const dateElement = document.getElementById('date');
+
+    hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('hidden');
+    });
+
+    const updateDate = () => {
+        const now = new Date();
+        const dateString = now.toLocaleDateString();
+        dateElement.textContent = dateString;
+    };
+
+    updateDate();
+});
+
+    </script>
+</body>
+</html>

@@ -146,3 +146,14 @@ span{
 .show-password{
     background-image: url("./Images/OpenEye.png");
 }
+
+#login-date{
+    color: #fff;
+    width: 240px;
+    height: 30px;
+    border-radius: 20px;
+    text-align: center;
+    border-color:#fff;
+    border: 1px solid #fff;
+    background-color: transparent;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cafe Search</title>
+  <style>
+    /* Optional: Some basic styling for demonstration */
+    #search-box {
+      margin-bottom: 10px;
+    }
+    .cafe-item {
+      margin-bottom: 5px;
+    }
+  </style>
+</head>
+<body>
+  <input type="text" id="search-box" placeholder="Search cafes by name...">
+  <div id="search-results">
+    <!-- Results will be displayed here -->
+  </div>
+
+  <!-- Mock data for demonstration -->
+  <script>
+    const cafes = [
+      { name: "Cafe A" },
+      { name: "Bistro B" },
+      { name: "Coffee House C" },
+      { name: "Cafeteria D" },
+      { name: "Tea Room E" }
+    ];
+
+    const searchBox = document.getElementById('search-box');
+    const searchResults = document.getElementById('search-results');
+
+    // Function to filter cafes based on search term
+    function filterCafes(searchTerm) {
+      searchTerm = searchTerm.toLowerCase();
+      const filteredCafes = cafes.filter(cafe => cafe.name.toLowerCase().includes(searchTerm));
+      displayCafes(filteredCafes);
+    }
+
+    // Function to display filtered cafes
+    function displayCafes(filteredCafes) {
+      // Clear previous results
+      searchResults.innerHTML = '';
+
+      // Display filtered cafes
+      filteredCafes.forEach(cafe => {
+        const cafeElement = document.createElement('div');
+        cafeElement.classList.add('cafe-item');
+        cafeElement.textContent = cafe.name;
+        searchResults.appendChild(cafeElement);
+      });
+    }
+
+    // Event listener for keystrokes in the search box
+    searchBox.addEventListener('input', function() {
+      filterCafes(this.value);
+    });
+
+    // Initial display of all cafes
+    displayCafes(cafes);
+  </script>
+</body>
+</html>

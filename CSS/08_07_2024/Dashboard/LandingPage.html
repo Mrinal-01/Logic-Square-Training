@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo-container">
+            <img src="Images/logo.jpeg" alt="Logo" class="logo">
+        </div>
+        <div class="profile-icon" id="profile-icon">
+            <img src="Images/profile.jpeg" alt="Profile">
+        </div>
+        <div class="profile-dropdown" id="profile-dropdown">
+            <p>Name: Mrinal Bera</p>
+            <p>Email: mrinal007@gmail.com</p>
+            <button onclick="editProfile()">Edit Profile</button>
+            <button onclick="toggleDarkMode()">Dark Theme</button>
+            <button onclick="logout()">Logout <i class="fas fa-sign-out-alt"></i></button>
+        </div>
+    </header>
+    <div class="side-nav" id="side-nav">
+        <button class="nav-toggle" onclick="toggleNav()"><i class="fas fa-bars"></i></button>
+        <nav id="nav-menu">
+            <a href="#home">Home</a>
+            <a href="../../ColorSwap.html">Color Changing Game</a>
+            <a href="../../MovingHead/index.html">Head Match Game</a>
+            <a href="../../27_06_2024/TrafficLight.html">Traffic Ligt</a>
+            <a href="../../02_07_2024/ScracthCardGame.html">Scratch Card Game</a>
+            <a href="../../01_07_2024/JqueryClass18.html">Cherry Festival</a>
+            <a href="#">Coming Soon ....</a>
+        </nav>
+    </div>
+    <div class="content">
+        <section id="slideshow" class="slideshow">
+            <div class="slides">
+                <img src="Images/slide1.jpeg" alt="Slide 1">
+                <img src="Images/slide2.jpeg" alt="Slide 2">
+                <img src="Images/Game1.jpg" alt="Slide 3">
+                <img src="Images/slide1.jpeg" alt="Slide 4">
+                <img src="Images/slide2.jpeg" alt="Slide 5">
+            </div>
+        </section>
+        <section id="read-more" class="read-more">
+            
+            <img src="Images/readMore.jpg" alt="Read More Image">
+            <div class="text">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, nesciunt distinctio aspernatur ad veniam tempore temporibus maxime praesentium suscipit labore? Ad atque quia, earum ratione voluptas odit natus corrupti quaerat?
+                    Doloribus, corporis soluta voluptatum unde quasi quaerat repellat alias quis porro voluptate nisi laudantium! Sint, nihil culpa. Quae, quo nam? Consectetur praesentium provident sunt eaque eum accusamus facilis recusandae quasi.
+                    Est sed suscipit facere fugiat, reiciendis laboriosam maiores sit. Magnam, veritatis architecto fugit explicabo molestiae similique impedit vel, earum quia mollitia praesentium minus? Totam earum quibusdam repudiandae perferendis obcaecati possimus!
+                    Dolores accusamus odio placeat consequatur quo. Sint reiciendis possimus sit voluptatibus alias amet? Veritatis, recusandae magni. Eius ipsa reprehenderit voluptatum adipisci quam, distinctio tempora dignissimos voluptate a at exercitationem aut?
+                    Veniam, dolores. Ab culpa temporibus voluptatibus maiores cum atque quas quam, sapiente nemo consectetur veritatis impedit sunt maxime, quos laboriosam voluptas neque iste ullam quaerat similique molestias quod voluptates?</p>
+                <p>Iure hic ut quibusdam et voluptatem a delectus tempora adipisci maxime perferendis, aspernatur quod, natus quae laboriosam eaque quaerat voluptate repellendus repellat doloremque soluta! Eaque earum blanditiis deserunt vitae maxime.</p>
+                <p class="more-text" style="display: none;">Illo id repellendus dolor perferendis amet impedit quas iure quia. Commodi nemo iusto, laborum earum autem, expedita quae et delectus saepe aliquid officia aut nulla assumenda maxime id similique? Dolorem.</p>
+            </div>
+            <button class="btn" onclick="readMore()">Read More</button>
+        </section>
+        <section id="about-mern" class="about-mern">
+            <div class="text-content">
+                <h2>MERN stack development...</h2>
+                <!-- Repeat the paragraph 10 times -->
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt ab nostrum corporis porro blanditiis voluptatibus corrupti exercitationem distinctio numquam, vitae eum ipsum perferendis quam velit hic mollitia error molestias omnis.
+                    Aliquid dolore accusamus adipisci, nulla eaque, expedita, fuga ipsa ad consequuntur aut ipsam! Beatae, quam. Ab, esse, quis placeat quam dolorem similique at velit voluptates incidunt harum rerum totam doloribus?
+                    Repellat, tenetur! Atque, eligendi quos omnis placeat tempora aspernatur sunt, asperiores possimus quam ducimus sequi repudiandae ullam nostrum similique reprehenderit rem. Blanditiis aliquid sunt sapiente dicta iusto porro suscipit soluta.
+                    praesentium odit veritatis rerum eaque dolor amet tenetur aut laudantium, officia ea repellat sint nam eligendi nulla perspiciatis nostrum aspernatur nesciunt suscipit quos unde, consequuntur modi doloribus inventore. Deserunt.
+                </p>
+            </div>
+            <img src="Images/Mern.jpg" alt="MERN Image">
+        </section>
+    </div>
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>Useful Links</h3>
+                <ul>
+                    <li><a href="https://www.w3schools.com/">W3school</a></li>
+                    <li><a href="https://logic-square.com/">Logic-Square</a></li>
+                    <li><a href="https://web.dev/">Web Dev</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Services</h3>
+                <ul>
+                    <li>Web Development</li>
+                    <li>Mobile Development</li>
+                    <li>SEO Optimization</li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>Email: mrinal007@com.com</p>
+                <p>Phone: +91 8172059732</p>
+            </div>
+        </div>
+        <div class="social-icons">
+            <a href="#"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+        </div>
+    </footer>
+    <script src="./script.js"></script>
+    
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Validation Example</title>
+<style>
+  .error-message {
+    color: red;
+  }
+</style>
+</head>
+<body>
+  <label for="email">Email:</label>
+  <input type="text" id="email">
+  <p id="error" class="error-message"></p>
+
+  <script>
+    document.getElementById('email').addEventListener('input', function() {
+      const emailInput = document.getElementById('email');
+      const errorElement = document.getElementById('error');
+      const email = emailInput.value.trim();
+
+      if (!email.includes('@')) {
+        errorElement.textContent = 'Please include "@" in the email address';
+      } else {
+        errorElement.textContent = '';
+      }
+    });
+  </script>
+</body>
+</html>
