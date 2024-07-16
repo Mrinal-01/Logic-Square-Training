@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>POST Request Example</title>
+</head>
+<body>
+    <h1>POST Request Example</h1>
+    <button id="post-button">Send POST Request</button>
+    <pre id="response"></pre>
+
+    <script>
+        async function sendPostRequest() {
+            const url = 'https://reqres.in/api/users';
+            const data = {
+                name: 'morpheus',
+                job: 'leader'
+            };
+
+            try {
+                const response=await fetch(url,{
+                  method:'POST',
+                  headers:{
+                    'Content-type':'application/json'
+                  },
+                  body:JSON.stringify(data)
+                })
+                
+                if (!response.ok) {
+                    throw new Error('Network response was not ok ' + response.statusText);
+                }
+
+                const responseData = await response.json();
+                document.getElementById('response').textContent = JSON.stringify(responseData,null,2)
+            } catch (error) {
+                console.error('Error:', error);
+                document.getElementById('response').textContent = 'Error: ' + error.message;
+            }
+        }
+
+        document.getElementById('post-button').addEventListener('click', sendPostRequest);
+    </script>
+</body>
+</html>

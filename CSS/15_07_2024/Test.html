@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch API Example</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #ccbcd1;
+        }
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+        img {
+            border-radius: 50%;
+        }
+        .name, .email {
+            font-weight: bold;
+        }
+        .name:hover, .email:hover {
+            font-weight: bold;
+            color: #92d7e7;
+        }
+    </style>
+</head>
+<body>
+    <h1>Users List</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Avatar</th>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody id="user-table">
+            <!-- Data will be inserted here -->
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchData() {
+            try {
+                const response = await fetch('https://reqres.in/api/users?page=2');
+                const data = await response.json();
+                return data.data;
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        }
+
+        async function populateTable() {
+            const users = await fetchData();
+            const tableBody = document.getElementById('user-table');
+
+            users.forEach(user => {
+                const row = document.createElement('tr');
+// ----------------------------------------------------------------------
+                const avatarCell = document.createElement('td');
+                const avatar = document.createElement('img');
+                avatar.src = user.avatar;
+                avatar.alt = `${user.first_name} ${user.last_name}`;
+                avatar.width = 80;
+                avatar.height = 80;
+                avatarCell.appendChild(avatar);
+                row.appendChild(avatarCell);
+// ---------------------------------------------------------------------
+                const nameCell = document.createElement('td');
+                const name = document.createElement('span');
+                name.textContent = `${user.first_name} ${user.last_name}`;
+                name.className = 'name';
+                nameCell.appendChild(name);
+                row.appendChild(nameCell);
+// ----------------------------------------------------------------------
+                const emailCell = document.createElement('td');
+                const email = document.createElement('span');
+                email.textContent = user.email;
+                email.className = 'email';
+                emailCell.appendChild(email);
+                row.appendChild(emailCell);
+
+                tableBody.appendChild(row);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', populateTable);
+    </script>
+</body>
+</html>

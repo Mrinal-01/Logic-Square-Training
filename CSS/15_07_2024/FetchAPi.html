@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <p>
+      response.text() – read the response and return as text, response.json() –
+      parse the response as JSON, response.formData() – return the response as
+      FormData object (explained in the next chapter), response.blob() – return
+      the response as Blob (binary data with type), response.arrayBuffer() –
+      return the response as ArrayBuffer (low-level representation of binary
+      data), additionally, response.body is a ReadableStream object, it allows
+      you to read the body chunk-by-chunk, we’ll see an example later.
+    </p>
+
+    <script>
+      // async function getData(){
+      //   let response=await fetch('https://reqres.in/api/users?page=2')
+
+      // if(response.ok){
+      //   // let json=await response.json()
+      //   // let json=await response.text()
+      //   // let json=response.formData()
+      //   let json=response.arrayBuffer()
+      //   console.log(json);
+
+      // }
+      // else{
+      //   console.log("Http error",response.status);
+      // }
+      // -------------------------------------------------------------------------
+
+      // let url = 'https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits';
+      // let response = await fetch(url);
+
+      // let commits = await response.json(); // read response body and parse as JSON
+      // console.log(commits);
+      // alert(commits[29].author.login);
+
+      //Using pure promise()
+      // fetch('https://api.github.com/repos/javascript-tutorial/en.javascript.info/commits').then(response=>response.json())
+      // .then(commits=>alert(commits[0].author.login))
+
+      //-------------------------------------------------------------------------
+
+      //Taking Image  means blob()data
+
+      //   let response=await fetch('/article/fetch/logo-fetch.svg')
+      //   let blob=await response.blob()
+      //   let img=document.createElement('img')
+      //   img.style='position:fixed;top:10px;left:10px;width:100px';
+
+      //   document.body.append(img)
+      //   img.src=URL.createObjectURL(blob)
+
+      //   setTimeout(() => {
+      //     img.remove();
+      //     URL.revokeObjectURL(img.src)
+      //   }, 3000);
+      // }
+      // getData()
+
+      //-------------------------------------------------------------------
+
+      //POST Request
+      (async () => {
+        let user = {
+          name: "John",
+          surname: "Smith",
+        };
+
+        let response = await fetch("/article/fetch/post/user", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json;charset=utf-8",
+          },
+          body: JSON.stringify(user),
+        });
+
+        let result = await response.json();
+        alert(result.message);
+      })();
+    </script>
+  </body>
+</html>
