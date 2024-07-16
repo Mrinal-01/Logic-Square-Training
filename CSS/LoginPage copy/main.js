@@ -103,4 +103,4 @@ function rewardCoin(){
 }
 previousDate=currentDate ; 
 localStorage.setItem('previousDate',previousDate)
-localStorage.setItem('count',count)
+// localStorage.setItem('count',count)
