@@ -3,16 +3,110 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Practice.css">
-    <title>Document</title>
+    <title>Rewards and Skin Color</title>
 </head>
 <body>
-    <div>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nostrum quae sequi eaque exercitationem nam. Dolorem in totam sed, recusandae officia amet ratione reiciendis deleniti cupiditate maxime quasi eos accusantium harum?
-        Eos ipsa autem sit mollitia rerum velit? Sit voluptatem eos, ipsa fugiat quis ut placeat quam molestiae eum maxime incidunt possimus ea maiores veritatis voluptatibus magni error ipsum! Magni, obcaecati.
-        Qui blanditiis amet enim eaque, tempora reiciendis! Eaque consequatur odio sed, minus quia nemo rem impedit aliquam et distinctio voluptatem, veritatis voluptas incidunt commodi officia deleniti vel. Rem, saepe voluptatem.
-        Nesciunt quae voluptatem reprehenderit, dolor dolores magnam porro deleniti sunt ducimus animi saepe in delectus laborum possimus labore et ipsum placeat sequi cumque atque magni doloribus! Vel ipsum impedit consequuntur!
-        Et omnis placeat quaerat excepturi quasi nostrum voluptates nam consequuntur. Ipsam, sunt laudantium praesentium, vero culpa placeat, perspiciatis cum ea asperiores iure odit aut consequatur earum odio iusto inventore optio.
+    <div id="reward-section">
+        <h1>Earned Rewards: <span id="earned-rewards">0</span></h1>
+        <h2>Skin Color: <span id="skin-color">None</span></h2>
+        <input type="date" id="login-date">
+        <button onclick="login()">Login</button>
     </div>
+    <div id="timer">
+        <h3>Current Date: <span id="current-date"></span></h3>
+    </div>
+
+    <script>
+        const REWARD_PER_DAY = 100;
+        const STREAK_DAYS = 5;
+        const SKIN_COLORS = ['Red', 'Blue', 'Green', 'Yellow', 'Purple'];
+        const USER_ID = 'unique_user_id'; // Replace with a unique user ID for actual user tracking
+
+        function getRandomSkinColor() {
+            return SKIN_COLORS[Math.floor(Math.random() * SKIN_COLORS.length)];
+        }
+
+        function loadState() {
+            const savedState = localStorage.getItem(USER_ID);
+            if (savedState) {
+                return JSON.parse(savedState);
+            } else {
+                return {
+                    streak: 0,
+                    lastLogin: null,
+                    earnedRewards: 0,
+                    skinColor: null
+                };
+            }
+        }
+
+        function saveState(state) {
+            localStorage.setItem(USER_ID, JSON.stringify(state));
+        }
+
+        function login() {
+            const state = loadState();
+            const loginDateInput = document.getElementById('login-date').value;
+            const loginDate = new Date(loginDateInput);
+
+            if (!loginDateInput) {
+                alert('Please select a date.');
+                return;
+            }
+
+            const lastLoginDate = new Date(state.lastLogin);
+            const isConsecutive = state.lastLogin && (loginDate - lastLoginDate === 86400000);
+
+            if (state.lastLogin === loginDateInput) {
+                alert('You have already logged in today.');
+                return;
+            }
+
+            if (isConsecutive) {
+                state.streak += 1;
+                state.earnedRewards += REWARD_PER_DAY;
+            } else {
+                state.streak = 1;
+                state.earnedRewards = REWARD_PER_DAY;
+                state.skinColor = getRandomSkinColor(); // Reset the skin color if a day is missed
+            }
+
+            if (state.streak % STREAK_DAYS === 0) {
+                state.skinColor = getRandomSkinColor();
+            } else if (state.skinColor === null) {
+                state.skinColor = getRandomSkinColor();
+            }
+
+            state.lastLogin = loginDateInput;
+
+            saveState(state);
+            updateUI(state);
+        }
+
+        function updateUI(state) {
+            document.getElementById('earned-rewards').textContent = state.earnedRewards;
+            document.getElementById('skin-color').textContent = state.skinColor;
+        }
+
+        function updateDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            document.getElementById('current-date').textContent = `${year}-${month}-${day}`;
+            document.getElementById('login-date').value = `${year}-${month}-${day}`;
+        }
+
+        window.onload = function() {
+            const state = loadState();
+            if (state.skinColor === null) {
+                state.skinColor = getRandomSkinColor();
+                state.earnedRewards += REWARD_PER_DAY;
+                saveState(state);
+            }
+            updateUI(state);
+            updateDate();
+        };
+    </script>
 </body>
 </html>

@@ -1,21 +1,207 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<link rel="stylesheet" href="./Style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+     <style>
+      /* styles.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+}
+
+.sidebar {
+    width: 20%;
+    padding: 20px;
+    background-color: #fff;
+    border-right: 1px solid #ddd;
+}
+
+.filter-section {
+    margin-bottom: 20px;
+}
+
+.filter-section h3 {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.checkbox-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.price-values {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.product-list {
+    width: 80%;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.product-item {
+    width: 23%;
+    background-color: #fff;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.product-item img {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-item h3 {
+    font-size: 16px;
+    margin-bottom: 10px;
+}
+
+.product-item p {
+    margin: 5px 0;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #888;
+    margin-left: 5px;
+}
+
+.discount {
+    color: #ff0000;
+}
+
+     </style>
 </head>
 <body>
+    <div class="container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <h2>Filters</h2>
+            <div class="filter-section">
+                <h3>Price</h3>
+                <input type="range" id="priceRange" min="0" max="2000" step="100" value="2000">
+                <div class="price-values">
+                    <span id="minPrice">0</span>
+                    <span> to </span>
+                    <span id="maxPrice">2000</span>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Size</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" value="S"> S</label>
+                    <label><input type="checkbox" value="M"> M</label>
+                    <label><input type="checkbox" value="L"> L</label>
+                    <label><input type="checkbox" value="XL"> XL</label>
+                    <label><input type="checkbox" value="XXL"> XXL</label>
+                </div>
+            </div>
+            <div class="filter-section">
+                <h3>Color</h3>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" value="Red"> Red</label>
+                    <label><input type="checkbox" value="Blue"> Blue</label>
+                    <label><input type="checkbox" value="Green"> Green</label>
+                    <label><input type="checkbox" value="Black"> Black</label>
+                    <label><input type="checkbox" value="White"> White</label>
+                </div>
+            </div>
+            <button id="filterBtn">Apply Filters</button>
+        </aside>
 
-<h1 class="center">This heading will not be affected</h1>
-<p class="center">This paragraph will be red and center-aligned.</p> 
-<p class="Message">This Message for all the user</p>
+        <!-- Main Content -->
+        <main class="product-list" id="productList">
+            <!-- Product items will be inserted here by JavaScript -->
+        </main>
+    </div>
 
-<div>
-    <h1 class="h1">Hello World!</h1>
-    <h1 class="h2">Hello World</h1>
-    <h1 class="h3">Hello World</h1>
-</div>
-<div class="back-img"></div>
+    <script >
+      // script.js
+const products = [
+    { id: 1, name: "Product 1", price: 479, sizes: ["S", "M", "L"], colors: ["Red", "Blue"], image: "path/to/image1.jpg" },
+    { id: 2, name: "Product 2", price: 369, sizes: ["M", "L"], colors: ["Green", "Black"], image: "path/to/image2.jpg" },
+    { id: 3, name: "Product 3", price: 199, sizes: ["L", "XL"], colors: ["Red", "Black"], image: "path/to/image3.jpg" },
+    { id: 4, name: "Product 4", price: 269, sizes: ["S", "XL"], colors: ["White", "Blue"], image: "path/to/image4.jpg" },
+    { id: 5, name: "Product 5", price: 599, sizes: ["M", "L", "XXL"], colors: ["Red", "Green"], image: "path/to/image5.jpg" },
+    { id: 6, name: "Product 6", price: 699, sizes: ["S", "M", "L"], colors: ["Blue", "Black"], image: "path/to/image6.jpg" },
+    { id: 7, name: "Product 7", price: 799, sizes: ["M", "XL", "XXL"], colors: ["Red", "White"], image: "path/to/image7.jpg" },
+    { id: 8, name: "Product 8", price: 899, sizes: ["S", "M", "L"], colors: ["Green", "Black"], image: "path/to/image8.jpg" },
+    { id: 9, name: "Product 9", price: 999, sizes: ["L", "XL"], colors: ["Blue", "White"], image: "path/to/image9.jpg" },
+    { id: 10, name: "Product 10", price: 1099, sizes: ["S", "M", "XXL"], colors: ["Red", "Black"], image: "path/to/image10.jpg" },
+    { id: 11, name: "Product 11", price: 1199, sizes: ["M", "L", "XL"], colors: ["Green", "White"], image: "path/to/image11.jpg" },
+    { id: 12, name: "Product 12", price: 1299, sizes: ["S", "L", "XXL"], colors: ["Blue", "Black"], image: "path/to/image12.jpg" },
+    { id: 13, name: "Product 13", price: 1399, sizes: ["M", "XL"], colors: ["Red", "White"], image: "path/to/image13.jpg" },
+    { id: 14, name: "Product 14", price: 1499, sizes: ["S", "M", "L"], colors: ["Green", "Black"], image: "path/to/image14.jpg" },
+    { id: 15, name: "Product 15", price: 1599, sizes: ["L", "XL", "XXL"], colors: ["Blue", "White"], image: "path/to/image15.jpg" },
+    { id: 16, name: "Product 16", price: 1699, sizes: ["S", "M", "XXL"], colors: ["Red", "Black"], image: "path/to/image16.jpg" },
+    { id: 17, name: "Product 17", price: 1799, sizes: ["M", "L", "XL"], colors: ["Green", "White"], image: "path/to/image17.jpg" },
+    { id: 18, name: "Product 18", price: 1899, sizes: ["S", "L", "XXL"], colors: ["Blue", "Black"], image: "path/to/image18.jpg" },
+    { id: 19, name: "Product 19", price: 1999, sizes: ["M", "XL"], colors: ["Red", "White"], image: "path/to/image19.jpg" },
+    { id: 20, name: "Product 20", price: 2099, sizes: ["S", "M", "L"], colors: ["Green", "Black"], image: "path/to/image20.jpg" }
+];
+
+function renderProducts(productList) {
+    const productListElem = document.getElementById('productList');
+    productListElem.innerHTML = '';
+    productList.forEach(product => {
+        const productItem = document.createElement('div');
+        productItem.classList.add('product-item');
+        productItem.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>₹${product.price}</p>
+            <p>Size: ${product.sizes.join(', ')}</p>
+            <p>Colors: ${product.colors.join(', ')}</p>
+        `;
+        productListElem.appendChild(productItem);
+    });
+}
+
+function filterProducts() {
+    const maxPrice = document.getElementById('priceRange').value;
+    const selectedSizes = Array.from(document.querySelectorAll('.filter-section input[type="checkbox"]:checked'))
+        .filter(input => input.value.match(/S|M|L|XL|XXL/))
+        .map(input => input.value);
+    const selectedColors = Array.from(document.querySelectorAll('.filter-section input[type="checkbox"]:checked'))
+        .filter(input => input.value.match(/Red|Blue|Green|Black|White/))
+        .map(input => input.value);
+
+    const filteredProducts = products.filter(product => {
+        const priceMatch = product.price <= maxPrice;
+        const sizeMatch = selectedSizes.length ? selectedSizes.some(size => product.sizes.includes(size)) : true;
+        const colorMatch = selectedColors.length ? selectedColors.some(color => product.colors.includes(color)) : true;
+        return priceMatch && sizeMatch && colorMatch;
+    });
+
+    renderProducts(filteredProducts);
+}
+
+document.getElementById('priceRange').addEventListener('input', function(event) {
+    document.getElementById('maxPrice').innerText = event.target.value;
+});
+
+document.getElementById('filterBtn').addEventListener('click', filterProducts);
+
+// Initial render
+renderProducts(products);
+
+    </script>
 </body>
 </html>
-
-

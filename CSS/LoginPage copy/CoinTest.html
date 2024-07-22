@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Coin and Navigation Example</title>
+    <style>
+      
+      *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        
+      }
+      body {
+        font-family: Arial, sans-serif;
+        display: flex;
+        width: 100%;
+        min-height: 100vh;
+        flex-direction: column;
+        /* justify-content: center; */
+        align-items: center;
+      }
+
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px;
+        background-color: #f4f4f4;
+        position: relative;
+        width: 100%;
+      }
+
+      .nav-container {
+        position: relative;
+      }
+
+      .hamburger {
+        font-size: 30px;
+        cursor: pointer;
+      }
+      
+      
+
+
+
+      #nav-menu.hidden {
+        display: none;
+      }
+
+      #nav-menu ul {
+        list-style-type: none;
+        padding: 0;
+        margin: 0;
+        background: linear-gradient(to right, #89cac0, #d4a3d0);
+        border-radius: 5px;
+        position: absolute;
+        top: 40px;
+        left: 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      #nav-menu ul li {
+        padding: 20px;
+        width: 150px;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+
+      #nav-menu ul li:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .top-right {
+        display: flex;
+        align-items: center;
+      }
+
+      .coin-icon {
+        width: 30px;
+        height: 30px;
+        margin-right: 10px;
+        background: transparent;
+      }
+
+      #date {
+        font-size: 18px;
+      }
+
+      /* body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            background-image: url(./Images/Texture.jpg);
+        } */
+      .container {
+        background: #fff;
+        padding: 20px;
+        /* border-radius: 10px; */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        background-image: url(./Images/Texture.jpg);
+        width: 100%;
+        flex-grow: 1;
+      }
+      .profile-img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 20px;
+        object-position: 0.5px 0.5px;
+        
+      }
+      .info {
+        margin: 10px 0;
+        color: antiquewhite;
+      }
+      .log-out {
+        cursor: pointer;
+        margin-top: 20px;
+        width: 100px;
+        min-height: 50px;
+        border-radius: 10px;
+        border-color: aqua;
+        color: rgb(174, 46, 46);
+        
+      }
+      .log-out:hover {
+        background-color: rgb(175, 133, 184);
+      }
+      header {
+        background-color: skyblue;
+      }
+    .container h2{
+      padding-top: 20px;
+      text-align: center;
+      background-clip: text;
+      color: transparent;
+      margin: 0 auto;
+      width: fit-content;
+      font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+      background-color: radial-gradient(#e66465, #9198e5);
+    }
+    .game-link{
+      text-decoration: none;
+      color: hwb(0 0% 100%);
+    }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-container">
+        <div class="hamburger" id="hamburger">&#9776;</div>
+        <nav id="nav-menu" class="hidden menu-class">
+          <ul>
+            <li>Games</li>
+            <li><a rel="stylesheet" href="../MovingHead/index.html" target="_blank" class="game-link">Moving Head</a></li>
+            <li><a rel="stylesheet" href="../27_06_2024/TrafficLight.html" target="_blank" class="game-link">Traffic Light</a></li>
+            <li><a rel="stylesheet" href="../ColorSwap.html" target="_blank" class="game-link">Color Swap</a></li>
+            <li><a rel="stylesheet" href="../02_07_2024/ScracthCardGame.html" target="_blank" class="game-link">Scratch Card</a></li>
+            <li><a rel="stylesheet" href="../Shopping Cart/index.html" target="_blank" class="game-link">BuyMe</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="top-right">
+        <img src="./Images/coin.gif" alt="Coin Icon" class="coin-icon"/>
+        <span class="coin-count" id="coin" style="width: 100px">100</span>
+        <span id="date"></span>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2 id="header-title">Welcome To the Gaming World</h2>
+      <img src="" alt="Profile Image" class="profile-img" id="profileImage" />
+      <div class="info" id="username">Username: JohnDoe</div>
+      <div class="info" id="email">Email: johndoe@example.com</div>
+      <div class="info" id="loginDate">Login Date: 2024-07-05</div>
+      <div class="info" id="loginTime">Login Time: 2024-07-05</div>
+      <div>
+        <input type="button" value="Log Out" class="log-out" onclick="logOut()" />
+      </div>
+      <!-- Date input for testing -->
+      <div class="info">
+        <label for="testLoginDate">Set Login Date for Testing:</label>
+        <input type="date" id="testLoginDate" />
+      </div>
+      <div>
+        <input type="button" value="Test Login" id="testLoginButton" />
+      </div>
+    </div>
+  <script >
+      let currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+// Function to get a random color
+function getRandomColor() {
+    const colors = ["skyblue", "lightgreen", "yellow", "pink", "lightcoral", "lightseagreen"];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// Function to calculate the difference in days between two dates
+function dayDifference(date1, date2) {
+    const differenceInTime = date2.getTime() - date1.getTime();
+    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+    return Math.floor(differenceInDays);
+}
+
+// Update user data on the page
+function updateUserData() {
+    document.getElementById("username").innerText = `Username: ${currentUser.name}`;
+    document.getElementById("email").innerText = `Email: ${currentUser.email}`;
+    document.getElementById("profileImage").src = currentUser.image;
+    document.getElementById("coin").textContent = currentUser.coins;
+    document.getElementById("header-title").style.color = currentUser.color;
+}
+
+// Reward logic
+function rewardCoin(testDate = null) {
+    const coinElement = document.getElementById('coin');
+    const currentDate = testDate ? new Date(testDate) : new Date();
+    let lastLoginDate = currentUser.lastLoginDate ? new Date(currentUser.lastLoginDate) : null;
+    let dateDiff = lastLoginDate ? dayDifference(lastLoginDate, currentDate) : null;
+
+    if (!currentUser.lastLoginDate || dateDiff === 1) {
+        currentUser.streak++;
+        if (currentUser.streak % 6 === 0) {
+            currentUser.color = getRandomColor();
+        }
+        currentUser.coins += 100;
+    } else if (dateDiff > 1) {
+        currentUser.streak = 1; // Reset streak if the login gap is more than 1 day
+        currentUser.coins = 100;
+        currentUser.color = getRandomColor();
+    }
+
+    currentUser.lastLoginDate = currentDate.toISOString();
+    coinElement.textContent = currentUser.coins;
+
+    // Save updated user data
+    localStorage.setItem("currentUser", JSON.stringify(currentUser));
+    updateUserData();
+}
+
+// Function to handle user logout
+function logOut() {
+    window.location.href = "./index.html";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const hamburger = document.getElementById("hamburger");
+    const navMenu = document.getElementById("nav-menu");
+    const testLoginButton = document.getElementById("testLoginButton");
+    const testLoginDateInput = document.getElementById("testLoginDate");
+
+    hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("hidden");
+    });
+
+    testLoginButton.addEventListener("click", () => {
+        const testDate = testLoginDateInput.value;
+        if (testDate) {
+            rewardCoin(testDate); // Call rewardCoin function with the test date
+        } else {
+            alert("Please select a date.");
+        }
+    });
+
+    rewardCoin(); // Call rewardCoin function on page load to update the coin and streak
+});
+
+    </script>
+    </body>
+</html>

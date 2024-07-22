@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <!-- <link rel="stylesheet" href="styles.css"> -->
+
+<style>
+  body {
+    display: flex;
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.sidebar {
+    width: 250px;
+    background: #333;
+    color: #fff;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: width 0.3s;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.sidebar.collapsed {
+    width: 60px;
+}
+
+.hamburger {
+    cursor: pointer;
+    padding: 10px;
+    text-align: center;
+    background: #444;
+    width: 92%;
+}
+
+.sidebar .profile {
+    text-align: center;
+    padding: 20px;
+}
+
+.sidebar .profile img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar nav ul li {
+    padding: 15px;
+    text-align: center;
+}
+
+.sidebar nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+}
+
+.content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+    transition: margin-left 0.3s, width 0.3s;
+}
+
+.content.collapsed {
+    margin-left: 60px;
+    width: calc(100% - 60px);
+}
+
+.content section {
+    margin-bottom: 20px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+
+.stat {
+    background: #f4f4f4;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+    width: 30%;
+}
+
+.form {
+    display: none;
+}
+
+.form h3 {
+    margin-top: 0;
+}
+
+.form label {
+    display: block;
+    margin-top: 10px;
+}
+
+.form input {
+    width: 100%;
+    padding: 5px;
+    margin-top: 5px;
+}
+
+.form button {
+    margin-top: 10px;
+    padding: 10px;
+    background: #333;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none;
+}
+
+</style>
+
+</head>
+<body>
+    <div class="sidebar">
+        <div class="hamburger" onclick="toggleMenu()">☰</div>
+        <div class="profile">
+            <img src="coin.png" alt="Admin Profile Picture">
+            <h3>Admin Name</h3>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#add-product" onclick="showSection('products')">Add Product</a></li>
+                <li><a href="#add-category" onclick="showSection('categories')">Add Category</a></li>
+                <li><a href="#show-orders" onclick="showSection('orders')">Show Orders</a></li>
+                <li><a href="#show-users" onclick="showSection('users')">Show Users</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="content">
+        <section id="dashboard">
+            <h2>Dashboard</h2>
+            <div class="stats">
+                <div class="stat">
+                    <h3>Total Orders</h3>
+                    <p id="total-orders">0</p>
+                </div>
+                <div class="stat">
+                    <h3>Total Users</h3>
+                    <p id="total-users">0</p>
+                </div>
+                <div class="stat">
+                    <h3>Total Turnover</h3>
+                    <p id="total-turnover">$0.00</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="products" class="hidden">
+            <h2>Products</h2>
+            <button onclick="showAddProductForm()">Add Product</button>
+            <div id="add-product-form" class="form hidden">
+                <h3>Add New Product</h3>
+                <form id="product-form">
+                    <label for="productId">Product ID:</label>
+                    <input type="text" id="productId" name="productId" required>
+                    
+                    <label for="productName">Product Name:</label>
+                    <input type="text" id="productName" name="productName" required>
+                    
+                    <label for="category">Category:</label>
+                    <input type="text" id="category" name="category" required>
+                    
+                    <label for="color">Color:</label>
+                    <input type="text" id="color" name="color" required>
+                    
+                    <label for="size">Size (comma separated):</label>
+                    <input type="text" id="size" name="size" required>
+                    
+                    <label for="costPrice">Cost Price:</label>
+                    <input type="number" id="costPrice" name="costPrice" required>
+                    
+                    <label for="markedPrice">Marked Price:</label>
+                    <input type="number" id="markedPrice" name="markedPrice" required>
+                    
+                    <label for="productImage">Product Image URL:</label>
+                    <input type="url" id="productImage" name="productImage" required>
+                    
+                    <button type="submit">Add Product</button>
+                </form>
+            </div>
+            <div id="product-list">
+                <!-- List of products will be populated here -->
+            </div>
+        </section>
+
+        <section id="categories" class="hidden">
+            <h2>Categories</h2>
+            <button onclick="showAddCategoryForm()">Add Category</button>
+            <div id="add-category-form" class="form hidden">
+                <h3>Add New Category</h3>
+                <form id="category-form">
+                    <label for="categoryId">Category ID:</label>
+                    <input type="text" id="categoryId" name="categoryId" required>
+                    
+                    <label for="categoryName">Category Name:</label>
+                    <input type="text" id="categoryName" name="categoryName" required>
+                    
+                    <button type="submit">Add Category</button>
+                </form>
+            </div>
+            <div id="category-list">
+                <!-- List of categories will be populated here -->
+            </div>
+        </section>
+
+        <section id="orders" class="hidden">
+            <h2>Orders</h2>
+            <div id="order-list">
+                <!-- List of orders will be populated here -->
+            </div>
+        </section>
+
+        <section id="users" class="hidden">
+            <h2>User Details</h2>
+            <div id="user-list">
+                <!-- List of users will be populated here -->
+            </div>
+        </section>
+    </div>
+    <!-- <script src="script.js"></script> -->
+
+    <script>
+      
+      function toggleMenu() {
+    document.querySelector('.sidebar').classList.toggle('collapsed');
+    document.querySelector('.content').classList.toggle('collapsed');
+}
+
+function showSection(sectionId) {
+    const sections = document.querySelectorAll('.content section');
+    sections.forEach(section => section.classList.add('hidden'));
+    document.getElementById(sectionId).classList.remove('hidden');
+}
+
+document.getElementById('product-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const product = {
+        id: document.getElementById('productId').value,
+        name: document.getElementById('productName').value,
+        category: document.getElementById('category').value,
+        color: document.getElementById('color').value,
+        size: document.getElementById('size').value.split(','),
+        costPrice: document.getElementById('costPrice').value,
+        markedPrice: document.getElementById('markedPrice').value,
+        image: document.getElementById('productImage').value
+    };
+    
+    const productList = document.getElementById('product-list');
+    const productItem = document.createElement('div');
+    productItem.innerHTML = `<p>${product.name} - ${product.category} - ${product.color}</p><button onclick="deleteProduct(this)">Delete</button>`;
+    productList.appendChild(productItem);
+    
+    document.getElementById('product-form').reset();
+    document.getElementById('add-product-form').classList.add('hidden');
+});
+
+function deleteProduct(button) {
+    button.parentElement.remove();
+}
+
+document.getElementById('category-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    
+    const category = {
+        id: document.getElementById('categoryId').value,
+        name: document.getElementById('categoryName').value
+    };
+    
+    const categoryList = document.getElementById('category-list');
+  })
+
+    </script>
+</body>
+</html>

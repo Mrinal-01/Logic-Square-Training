@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="products.css">
+</head>
+<body>
+  <header class="header">
+    <div class="logo">
+        <img src="../Images/buyme-high-resolution-logo-transparent.png" alt="Logo">  
+    </div>
+    <div class="search-bar">
+        <input type="text" placeholder="Search for Products, Brands and More">
+        <img src="../Images/search.svg" alt="Search Icon">
+    </div>
+    <div class="menu">
+        <a href="#" class="login"><img src="../Images/profile.png" alt="Login Icon"> Login <img id="arrow" src="../Images/down-arrow.png"  style="padding: 5px; height: 13px;"  onmouseover="hover(this);" onmouseout="unhover(this);"></a>
+        
+        <a href="#" class="cart"><img src="../Images/shopping-cart.png" alt="Cart Icon"> Cart</a>
+        
+        <a href="#" class="seller">Become a Seller</a>
+        
+        <a href="#" class="more">...</a>
+    </div>
+</header>
+
+
+
+
+<div class="container">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+      <h2>Filters</h2>
+      <div class="filter-section">
+          <h3>Price</h3>
+          <input type="range" id="priceRange" min="0" max="2000" step="100" value="2000">
+          <div class="price-values">
+              <span id="minPrice">0</span>
+              <span> to </span>
+              <span id="maxPrice">2000</span>
+          </div>
+      </div>
+      <div class="filter-section">
+          <h3>Size</h3>
+          <div class="checkbox-group">
+              <label><input type="checkbox" value="S"> S</label>
+              <label><input type="checkbox" value="M"> M</label>
+              <label><input type="checkbox" value="L"> L</label>
+              <label><input type="checkbox" value="XL"> XL</label>
+              <label><input type="checkbox" value="XXL"> XXL</label>
+          </div>
+      </div>
+      <div class="filter-section">
+          <h3>Color</h3>
+          <div class="checkbox-group">
+              <label><input type="checkbox" value="Red"> Red</label>
+              <label><input type="checkbox" value="Blue"> Blue</label>
+              <label><input type="checkbox" value="Green"> Green</label>
+              <label><input type="checkbox" value="Black"> Black</label>
+              <label><input type="checkbox" value="White"> White</label>
+          </div>
+      </div>
+      <button id="filterBtn">Apply Filters</button>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="product-list" id="productList">
+      <!-- Product Items -->
+      
+        <div class="product-item">
+         <a href="">
+          <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/j/h/w/-original-imagycshuhvjyr8y.jpeg?q=70" alt="Product 1">
+          <h3>Roadstar T-shirt</h3>
+          <p>₹479</p>
+          <p>Size: S, M, L</p>
+          <p>Colors: Red, Blue</p>
+        </a>
+      </div>
+    
+      <div class="product-item">
+          <a href="">
+            <img src="https://rukminim2.flixcart.com/image/612/612/l4vnbm80/t-shirt/i/j/q/m-askporgfj72665-new-allen-solly-original-imagfzk8vjxgurcj.jpeg?q=70" alt="Product 2">
+          <h3>Allen Solly</h3>
+          <p>₹369</p>
+          <p>Size: M, L</p>
+          <p>Colors: Green, Black</p>
+          </a>
+      </div>
+      <div class="product-item">
+          <a href="">
+            <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/m/u/6/xxl-xyptsrt09-xyxx-original-imah2hgfd3mdhswj.jpeg?q=70" alt="Hilander T-Shirt">
+          <h3>Hilander T-Shirt</h3>
+          <p>₹199</p>
+          <p>Size: L, XL</p>
+          <p>Colors: Red, Black</p>
+          </a>
+      </div>
+      <div class="product-item">
+          <a href="">
+            <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/shirt/j/t/p/m-usshto2763-u-s-polo-assn-original-imahfyn6rnr57dhh.jpeg?q=70" alt="Product 4">
+          <h3>USA Shirt 4</h3>
+          <p>₹269</p>
+          <p>Size: S, XL</p>
+          <p>Colors: White, Blue</p>
+          </a>
+      </div>
+      <div class="product-item">
+          <a href="">
+            <img src="https://rukminim2.flixcart.com/image/612/612/ksyz8280/shirt/m/g/u/m-32908-0085-levi-s-original-imag6ffen83g4hba.jpeg?q=70" alt="Product 5">
+          <h3>Roadstar Shirt</h3>
+          <p>₹599</p>
+          <p>Size: M, L, XXL</p>
+          <p>Colors: Red, Green</p>
+          </a>
+      </div>
+      <div class="product-item">
+          <a href="">
+            <img src="https://rukminim2.flixcart.com/image/612/612/kpbipow0/shirt/n/o/c/44-12918808-roadster-original-imag3kvfsagrev3y.jpeg?q=70" alt="Product 6">
+          <h3>Roadstar Shirt</h3>
+          <p>₹699</p>
+          <p>Size: S, M, L</p>
+          <p>Colors: Blue, Black</p>
+          </a>
+      </div>
+      <div class="product-item">
+          <a href="">
+            <img src="https://rukminim2.flixcart.com/image/612/612/kgjqefk0-0/shirt/s/q/8/42-12127360-roadster-original-imafwr33segzxyjp.jpeg?q=70" alt="Product 7">
+          <h3>Allen Solly Shirt</h3>
+          <p>₹799</p>
+          <p>Size: M, XL, XXL</p>
+          <p>Colors: Red, White</p>
+      </div>
+          </a>
+      <div class="product-item">
+          <a href="">
+            <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/n/u/s/m-askpqrgfa36876-allen-solly-original-imagxfenknxukygb.jpeg?q=70" alt="Product 8">
+          <h3>Allen Solly Tshirt</h3>
+          <p>₹899</p>
+          <p>Size: S, M, L</p>
+          <p>Colors: Green, Black</p>
+          </a>
+      </div>
+      <div class="product-item">
+          <a href="">
+            <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/s/p/l/-original-imagy3k8hpga7hxs.jpeg?q=70" alt="Product 9">
+          <h3>Allen Solly</h3>
+          <p>₹999</p>
+          <p>Size: L, XL</p>
+          <p>Colors: Blue, White</p>
+          </a>
+      </div>
+       <div class="product-item">
+          <a href="">
+            <img src="https://rukminim2.flixcart.com/image/612/612/xif0q/t-shirt/p/o/d/-original-imahfs7bwwm6rhqn.jpeg?q=70" alt="Product 10">
+          <h3>Roadstar</h3>
+          <p>₹1099</p>
+          <p>Size: S, M, XXL</p>
+          <p>Colors: Red, Black</p>
+          </a>
+      </div>
+      </div>
+  </main>
+</div>
+
+
+
+<script src="products.js"></script>
+</body>
+</html>

@@ -1,12 +1,22 @@
-let arr=[1,2,3,4]
-{
-    let x=arr.pop()
-    arr.unshift(x)
-    
+// The object you want to add to the array
+let newObject = { name: "John Doe", age: 30 };
+
+// Function to add the object to the array in localStorage
+function addToLocalStorageArray(key, obj) {
+    // Retrieve the array from localStorage
+    let existingArray = localStorage.getItem(key);
+
+    // If there is no existing array, initialize an empty array
+    existingArray = existingArray ? JSON.parse(existingArray) : [];
+
+    // Push the new object to the array
+    existingArray.push(obj);
+
+    // Store the updated array back in localStorage
+    localStorage.setItem(key, JSON.stringify(existingArray));
 }
-// console.log(x);
-    console.log(arr);
 
-
+// Call the function with the key and the object
+addToLocalStorageArray('myArray', newObject);
 
 

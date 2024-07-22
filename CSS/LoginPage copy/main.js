@@ -1,106 +1,77 @@
-// const users=localStorage.getItem('user')
+// Retrieve user data from localStorage or initialize if not present
 const storedUserData = localStorage.getItem("currentUser");
+let users = storedUserData ? JSON.parse(storedUserData) : {};
 
-const users = JSON.parse(storedUserData);
+if (!users.name) {
+  // Initialize user data if not present
+  users = {
+    name: "JohnDoe",
+    email: "johndoe@example.com",
+    image: "./Images/default-profile.png",
+    coins: 100,
+    lastLoginDate: null,
+    streak: 0,
+  };
+}
 
-// // Populate the data
-document.getElementById("username").innerText = `Username: ${users.Name}`;
-document.getElementById("email").innerText = `Email: ${users.username}`;
-document.getElementById("loginDate").innerText = `Login Date: ${new Date().toLocaleDateString()} `;
-document.getElementById("loginTime").innerText = `Login Time: ${new Date().toLocaleTimeString()} `;
-document.getElementById("profileImage").src = users.profileImage;
+// Update user data on the page
+document.getElementById("username").innerText = `Username: ${users.name}`;
+document.getElementById("email").innerText = `Email: ${users.email}`;
+document.getElementById("profileImage").src = users.image;
 
+// Function to calculate the difference in days between two dates
+function dayDifference(date1, date2) {
+  const differenceInTime = date2.getTime() - date1.getTime();
+  const differenceInDays = differenceInTime / (1000 * 3600 * 24);
+  return Math.floor(differenceInDays);
+}
 
+// Update date elements
+const now = new Date();
+document.getElementById("loginDate").innerText = `Login Date: ${now.toLocaleDateString()}`;
+document.getElementById("loginTime").innerText = `Login Time: ${now.toLocaleTimeString()}`;
+document.getElementById("date").textContent = `Login Date: ${now.toLocaleDateString()}`;
 
-//This code for navigation bar and header(coin, date)
+// Reward logic
+function rewardCoin() {
+  const coinElement = document.getElementById('coin');
+
+  const currentDate = new Date();
+  let lastLoginDate = new Date(users.lastLoginDate);
+  let dateDiff = dayDifference(lastLoginDate, currentDate);
+
+  if (!users.lastLoginDate || dateDiff === 1) {
+    users.streak++;
+    if (users.streak % 6 === 0) {
+      users.coins += 500;
+      // Additional bonus logic if needed
+    } else {
+      users.coins += 100;
+    }
+  } else if (dateDiff > 1) {
+    users.streak = 1; // Reset streak if the login gap is more than 1 day
+    users.coins = 100;
+  }
+
+  users.lastLoginDate = currentDate;
+  coinElement.textContent = users.coins;
+
+  // Save updated user data
+  localStorage.setItem("currentUser", JSON.stringify(users));
+}
+
+// Function to handle user logout
+function logOut() {
+  window.location.href = "./index.html";
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const hamburger = document.getElementById("hamburger");
   const navMenu = document.getElementById("nav-menu");
-  const dateElement = document.getElementById("date");
 
   hamburger.addEventListener("click", () => {
     navMenu.classList.toggle("hidden");
   });
 
-  rewardCoin() ///////Be aware this is added for testing plz remove it when
-
-  const updateDate = () => {
-    const now = new Date();
-    const dateString = now.toLocaleDateString();
-    dateElement.textContent = `Login Date: ${dateString}`;
-  };
-
-  updateDate();
+  rewardCoin(); // Call rewardCoin function on page load to update the coin and streak
 });
-
-function logOut(){
-    window.location.href="./index.html"
-}
-
-//-------------------------------------------------------------------------------
-//Function will count Counting the date difference
-function dayDifference(date1, date2) {
-    // Get the difference in milliseconds
-    const differenceInTime = date2.getTime() - date1.getTime();
-    // Convert the difference from milliseconds to days
-    const differenceInDays = differenceInTime / (1000 * 3600 * 24);
-    return Math.floor(differenceInDays);
-}
-
-//-----------------------------------------------------------------------------------
-
-//GLobally declared so that we can use for date difference calculation
-let currentDate=new Date();
-
-
-function rewardCoin(){
-    
-    const coin=document.getElementById('coin')
-
-    //To store the current and previous date in the memory
-    if(!localStorage.getItem(currentDate)){
-        localStorage.setItem('currentDate',currentDate)
-        // localStorage.setItem('previousDate',previousDate)
-    }
-    let dateDiff=dayDifference(previousDate,currentDate)
-    let color='skyblue';
-    let point=100;
-    let count=1;
-    let skinColor=false;
-
-    if(dayDifference===1 || previousDate===undefined){
-        if(count%6==1){
-            point+=100;
-        }
-        if(count%6==2){
-            point+=100;
-        }
-        if(count%6==3){
-            point+=100;
-        }
-        if(count%6==4){
-            point+=100;
-        }
-        if(count%6==5){
-            point+=100;
-        }
-        if(count%6==0 || skinColor==flase){
-            point+=0;
-            skinColor=true;
-            color='Crimson'
-        }
-        
-    }
-    else if(currentDate-previousDate===0){
-        return
-    }
-    else{
-        point=0
-    }
-
-
-    coin.textContent=ponit;
-}
-previousDate=currentDate ; 
-localStorage.setItem('previousDate',previousDate)
-// localStorage.setItem('count',count)

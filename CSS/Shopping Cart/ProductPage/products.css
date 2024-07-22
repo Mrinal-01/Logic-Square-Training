@@ -1,0 +1,183 @@
+/* styles.css */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  background: rgb(218, 178, 222);
+background: linear-gradient(0deg, rgb(225, 236, 236) 0%, rgb(245, 243, 246) 100%);
+
+  padding: 10px 20px;
+  color: white;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  height: 40px;
+}
+
+
+
+.search-bar {
+  flex-grow: 1;
+  margin-left: 20px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: azure;
+  border-radius: 7px;
+}
+
+
+.search-bar input {
+  width: 100%;
+  padding: 10px 10px 10px 40px;
+  border: none;
+  border-radius: 2px;
+}
+
+.search-bar img {
+  position: absolute;
+  left: 10px;
+  height: 20px;
+}
+
+.menu {
+  display: flex;
+  align-items: center;
+}
+
+.menu a {
+  margin-left: 20px;
+  color: rgb(37, 107, 135);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.menu a img {
+  height: 20px;
+  margin-right: 5px;
+}
+
+.menu .login::before {
+  content: "";
+  margin-right: 5px;
+}
+
+.menu .cart::before {
+  content: "";
+  margin-right: 5px;
+}
+
+.menu .seller::before {
+  content: "";
+  margin-right: 5px;
+}
+
+.menu .more::before {
+  content: "";
+  margin-right: 5px;
+}
+
+
+
+
+
+
+
+.container {
+  display: flex;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 200px;
+  margin-right: 20px;
+}
+
+.sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.filter-section {
+  margin-bottom: 20px;
+}
+
+.filter-section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.filter-section input[type="range"] {
+  width: 100%;
+}
+
+.filter-section .price-values {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.checkbox-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  flex: 1;
+}
+.product-list a{
+  text-decoration: none;
+  color: black;
+  cursor: pointer;
+}
+.product-item {
+  border: 1px solid #ddd;
+  padding: 10px;
+  width: calc(25% - 20px);
+  box-sizing: border-box;
+  
+}
+
+.product-item img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.product-item h3 {
+  font-size: 18px;
+  margin: 0 0 10px;
+}
+
+.product-item p {
+  margin: 5px 0;
+}
+
+#filterBtn {
+  background-color: #007BFF;
+  color: white;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+#filterBtn:hover {
+  background-color: #0056b3;
+}

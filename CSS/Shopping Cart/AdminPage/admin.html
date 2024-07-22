@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <div class="admin-page">
+    <div class="header">
+      <img src="../Images/buyme-high-resolution-logo-transparent.png" alt="Logo" class="logo">
+      <h1>Admin Dashboard</h1>
+    </div>
+
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="admin.html" id="home-link">Home</a>
+      <a href="#" id="add-product-link">Add Products</a>
+      <a href="#" id="show-categories-link">Show Categories</a>
+      <a href="#" id="show-products-link">Show Products</a>
+      <a href="#">Show Orders</a>
+      <a href="#">Show Users</a>
+      <a href="#">Contact</a>
+      <div class="logout"><button type="submit" id="logout-btn">Logout</button></div>
+    </div>
+
+    <div id="main">
+      <button class="openbtn" onclick="openNav()">☰</button>
+      <div class="profile-details">
+        <img src="../Images/profile.png" alt="Profile Image" id="profile-icon">
+        <div id="profile-modal" class="profile-modal">
+          <h3>Admin</h3>
+          <p id="name">Admin Name: John Doe</p>
+          <p id="email">Email: admin@example.com</p>
+          <p id="current-time"></p>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item stat1">
+          <h2>Total Orders</h2>
+          <p id="total-orders">1000</p>
+        </div>
+        <div class="stat-item stat2" >
+          <h2>Total Turnover</h2>
+          <p id="total-turnover">150,000</p>
+        </div>
+        <div class="stat-item stat3">
+          <h2>Orders Delivered</h2>
+          <p id="orders-delivered">900</p>
+        </div>
+        <div class="stat-item stat4">
+          <h2>Orders Pending</h2>
+          <p id="orders-pending">100</p>
+        </div>
+      </div>
+
+      <!-- Add this form to your HTML inside the div#main -->
+      <div id="add-product-form" class="form-container" style="display: none;">
+        <h2>Add New Product</h2>
+        <form id="productForm">
+          <label for="productId">Product ID:</label>
+          <input type="text" id="productId" required><br>
+          <label for="productName">Product Name:</label>
+          <input type="text" id="productName" required><br>
+          <label for="category">Category:</label>
+          <input type="text" id="category" required><br>
+          <label for="desc">Product Description:</label>
+          <input type="text" id="desc" required><br>
+          <label for="price">Price:</label>
+          <input type="number" id="price" required><br>
+          <label for="sellPrice">Sell Price:</label>
+          <input type="number" id="sellPrice" required><br>
+          <label for="size">Size:</label>
+          <input type="text" id="size" ><br>
+          <label for="color">Color:</label>
+          <input type="text" id="color" required><br>
+          <label for="image">Image Link:</label>
+          <input type="text" id="image" required>
+          <button type="submit">Add Product</button>
+        </form>
+      </div>
+
+      <!-- Product List Container -->
+      <div id="product-list-container" class="product-list-container" style="display: none;">
+        <h2>Product List</h2>
+        <h3 id="category-wise"></h3>
+        <div id="productList">
+        </div>
+      </div>
+
+      <!-- Category List Container -->
+      <div id="category-list-container" class="category-list-container" style="display: none;">
+        <h2>Category List</h2>
+        <div id="categoryList"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

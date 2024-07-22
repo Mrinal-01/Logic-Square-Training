@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      text-decoration: none;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --accent-color: #fff;
+      --gradient-color: #FBFBFB;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      width: 100vw;
+      height: 100vh;
+      background-image: linear-gradient(to top, #fff1eb 0%, #ace0f9 100%);
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      background-color: #111;
+      color: white;
+    }
+
+    .header .logo {
+      height: 50px;
+      margin-right: 20px;
+    }
+
+    .header h1 {
+      font-size: 2em;
+      margin: 0;
+    }
+
+    .sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      left: 0;
+      background-color: #111;
+      overflow-x: hidden;
+      transition: 0.5s;
+      padding-top: 60px;
+    }
+
+    #logout-btn {
+      padding: 20px;
+      background-color: #ffffff;
+      cursor: pointer;
+      width: 180px;
+      border-radius: 10px;
+      font-size: medium;
+      font: bold;
+    }
+
+    .logout {
+      padding-left: 20px;
+      padding-top: 30px;
+    }
+
+    #logout-btn:hover {
+      background-color: rgb(196, 50, 108);
+    }
+
+    .sidebar a {
+      padding: 40px 8px 8px 32px;
+      text-decoration: none;
+      font-size: 25px;
+      color: #818181;
+      display: block;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      color: #f1f1f1;
+    }
+
+    .sidebar .closebtn {
+      position: absolute;
+      top: 0;
+      right: 25px;
+      font-size: 36px;
+      margin-left: 50px;
+    }
+
+    .openbtn {
+      font-size: 20px;
+      cursor: pointer;
+      background-color: #111;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+    }
+
+    .openbtn:hover {
+      background-color: #444;
+    }
+
+    #main {
+      transition: margin-left .5s;
+      padding: 16px;
+      flex: 1;
+    }
+
+    .profile-details {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .profile-details img {
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .profile-modal {
+      display: none;
+      position: absolute;
+      top: 50px;
+      right: 0;
+      background: rgb(60, 186, 157);
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      z-index: 100;
+      height: 200px;
+      width: 300px;
+      line-height: 5vh;
+    }
+
+    .profile-details:hover .profile-modal {
+      display: block;
+    }
+
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 20px;
+    }
+
+    .stat-item {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      width: 223px;
+      height: 209px;
+    }
+
+    .stat1 {
+      background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+    }
+
+    .stat2 {
+      background-image: linear-gradient(to right, #43e97b 0%, #38f9d7 100%);
+    }
+
+    .stat3 {
+      background-image: linear-gradient(to top, #0fd850 0%, #f9f047 100%);
+    }
+
+    .stat4 {
+      background-image: linear-gradient(to top, #d5dee7 0%, #ffafbd 0%, #c9ffbf 100%);
+    }
+
+    .stat-item h2 {
+      margin-bottom: 10px;
+      font-size: 1.5em;
+    }
+
+    .stat-item p {
+      font-size: 1.2em;
+    }
+
+    @media screen and (max-height: 450px) {
+      .sidebar { padding-top: 15px; }
+      .sidebar a { font-size: 18px; }
+    }
+
+    .form-container {
+      margin: 20px 0;
+      padding: 20px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      overflow: auto; /* Ensures form will overflow properly */
+    }
+
+    .form-container h2 {
+      margin-bottom: 10px;
+    }
+
+    .form-container form {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-container form label {
+      margin: 5px 0;
+    }
+
+    .form-container form input {
+      margin: 5px 0;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+
+    .form-container form button {
+      margin: 10px 0;
+      padding: 10px;
+      border: none;
+      background-color: #111;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .form-container form button:hover {
+      background-color: #444;
+    }
+
+    .product-list-container,
+    .category-list-container {
+      margin: 20px 0;
+      padding: 20px;
+      background: white;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-list-container h2,
+    .category-list-container h2 {
+      margin-bottom: 10px;
+    }
+
+    .product,
+    .category {
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    .product p,
+    .category h3 {
+      margin: 5px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    .category-title {
+      background-color: #e8f0fe;
+      padding: 10px;
+      margin-top: 20px;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="admin-page">
+    <div class="header">
+      <img src="../Images/buyme-high-resolution-logo-transparent.png" alt="Logo" class="logo">
+      <h1>Admin Dashboard</h1>
+    </div>
+
+    <div id="mySidebar" class="sidebar">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+      <a href="#" id="home-link">Home</a>
+      <a href="#" id="add-product-link">Add Products</a>
+      <a href="#" id="show-categories-link">Show Categories</a>
+      <a href="#" id="show-products-link">Show Products</a>
+      <a href="#">Show Orders</a>
+      <a href="#">Show Users</a>
+      <a href="#">Contact</a>
+      <div class="logout"><button type="submit" id="logout-btn">Logout</button></div>
+    </div>
+
+    <div id="main">
+      <button class="openbtn" onclick="openNav()">☰</button>
+      <div class="profile-details">
+        <img src="../Images/profile.png" alt="Profile Image" id="profile-icon">
+        <div id="profile-modal" class="profile-modal">
+          <h3>Admin</h3>
+          <p>Admin Name: John Doe</p>
+          <p>Email: admin@example.com</p>
+          <p>Role: Super Admin</p>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div class="stat-item stat1">
+          <h2>Total Orders</h2>
+          <p id="total-orders">0</p>
+        </div>
+        <div class="stat-item stat2">
+          <h2>Total Turnover</h2>
+          <p id="total-turnover">$0</p>
+        </div>
+        <div class="stat-item stat3">
+          <h2>Orders Delivered</h2>
+          <p id="orders-delivered">0</p>
+        </div>
+        <div class="stat-item stat4">
+          <h2>Orders Pending</h2>
+          <p id="orders-pending">0</p>
+        </div>
+      </div>
+
+      <div class="form-container" id="add-product-form" style="display:none;">
+        <h2>Add New Product</h2>
+        <form id="product-form">
+          <label for="product-name">Product Name:</label>
+          <input type="text" id="product-name" required>
+
+          <label for="product-description">Product Description:</label>
+          <input type="text" id="product-description" required>
+
+          <label for="product-price">Product Price:</label>
+          <input type="number" id="product-price" required>
+
+          <label for="product-image">Product Image:</label>
+          <input type="text" id="product-image" required>
+
+          <label for="product-category">Product Category:</label>
+          <input type="text" id="product-category" required>
+
+          <button type="submit">Add Product</button>
+        </form>
+      </div>
+
+      <div class="product-list-container" id="product-list" style="display:none;">
+        <h2>Product List</h2>
+        <div id="product-table-container">
+          <table id="product-table">
+            <thead>
+              <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Image URL</th>
+                <th>Category</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="category-list-container" id="category-list" style="display:none;">
+        <h2>Category List</h2>
+        <div id="category-container">
+          <div class="category" id="category1">
+            <h3 class="category-title">Electronics</h3>
+            <table id="product-table1">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Image URL</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="category" id="category2">
+            <h3 class="category-title">Clothing</h3>
+            <table id="product-table2">
+              <thead>
+                <tr>
+                  <th>Product Name</th>
+                  <th>Description</th>
+                  <th>Price</th>
+                  <th>Image URL</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    function openNav() {
+      document.getElementById("mySidebar").style.width = "250px";
+      document.getElementById("main").style.marginLeft = "250px";
+    }
+
+    function closeNav() {
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft = "0";
+    }
+
+    document.getElementById("add-product-link").addEventListener("click", function() {
+      document.getElementById("add-product-form").style.display = "block";
+      document.getElementById("product-list").style.display = "none";
+      document.getElementById("category-list").style.display = "none";
+    });
+
+    document.getElementById("show-products-link").addEventListener("click", function() {
+      document.getElementById("add-product-form").style.display = "none";
+      document.getElementById("product-list").style.display = "block";
+      document.getElementById("category-list").style.display = "none";
+    });
+
+    document.getElementById("show-categories-link").addEventListener("click", function() {
+      document.getElementById("add-product-form").style.display = "none";
+      document.getElementById("product-list").style.display = "none";
+      document.getElementById("category-list").style.display = "block";
+    });
+
+    // Fetch product list and populate the table
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+
+    function renderProductTable() {
+      const productTableBody = document.getElementById("product-table").querySelector("tbody");
+      productTableBody.innerHTML = "";
+
+      products.forEach(product => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${product.name}</td>
+          <td>${product.description}</td>
+          <td>${product.price}</td>
+          <td>${product.image}</td>
+          <td>${product.category}</td>
+        `;
+        productTableBody.appendChild(row);
+      });
+    }
+
+    function renderCategoryTables() {
+      const category1TableBody = document.getElementById("product-table1").querySelector("tbody");
+      const category2TableBody = document.getElementById("product-table2").querySelector("tbody");
+
+      category1TableBody.innerHTML = "";
+      category2TableBody.innerHTML = "";
+
+      products.forEach(product => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+          <td>${product.name}</td>
+          <td>${product.description}</td>
+          <td>${product.price}</td>
+          <td>${product.image}</td>
+        `;
+        if (product.category === "Electronics") {
+          category1TableBody.appendChild(row);
+        } else if (product.category === "Clothing") {
+          category2TableBody.appendChild(row);
+        }
+      });
+    }
+
+    document.getElementById("product-form").addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const name = document.getElementById("product-name").value;
+      const description = document.getElementById("product-description").value;
+      const price = document.getElementById("product-price").value;
+      const image = document.getElementById("product-image").value;
+      const category = document.getElementById("product-category").value;
+
+      const newProduct = { name, description, price, image, category };
+      products.push(newProduct);
+
+      localStorage.setItem('products', JSON.stringify(products));
+
+      renderProductTable();
+      renderCategoryTables();
+
+      document.getElementById("product-form").reset();
+    });
+
+    // Initial render
+    renderProductTable();
+    renderCategoryTables();
+  </script>
+</body>
+</html>

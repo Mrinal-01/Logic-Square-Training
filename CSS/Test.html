@@ -1,167 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Coin and Navigation Example</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Page</title>
+  <style>
+    body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f0f0f0;
+  font-family: Arial, sans-serif;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: #f4f4f4;
-    position: relative;
+.registration-container {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.nav-container {
-    position: relative;
+h1, h2 {
+  text-align: center;
 }
 
-.hamburger {
-    font-size: 30px;
-    cursor: pointer;
+form {
+  display: flex;
+  flex-direction: column;
 }
 
-#nav-menu.hidden {
-    display: none;
+label {
+  margin-top: 10px;
 }
 
-#nav-menu ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    background: linear-gradient(to right, #ff7e5f, #feb47b);
-    border-radius: 5px;
-    position: absolute;
-    top: 40px;
-    left: 0;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="file"] {
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
 }
 
-#nav-menu ul li {
-    padding: 10px;
-    cursor: pointer;
-    transition: background 0.3s;
+button {
+  padding: 10px;
+  margin-top: 20px;
+  background-color: #007BFF;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
-#nav-menu ul li:hover {
-    background: rgba(255, 255, 255, 0.2);
+button:hover {
+  background-color: #0056b3;
 }
 
-.top-right {
-    display: flex;
-    align-items: center;
+#stored-data {
+  margin-top: 20px;
+  background: #f9f9f9;
+  padding: 10px;
+  border-radius: 5px;
 }
 
-.coin-icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 10px;
-}
-
-#date {
-    font-size: 18px;
-}
-
-
-        /* body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background-color: #f0f0f0;
-            background-image: url(./Images/Texture.jpg);
-        } */
-        .container {
-            background: #fff;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            background-image: url(./Images/Texture.jpg);
-        }
-        .profile-img {
-            width: 100px;
-            height: 100px;
-            border-radius: 50%;
-            object-fit:fill;
-            margin-bottom: 20px;
-        }
-        .info {
-            margin: 10px 0;
-        }
-        .log-out{
-            cursor: pointer;
-            margin-top: 20px;
-            border-radius: 1rem;
-            border-color: aqua;
-            color: rgb(174, 46, 46);
-        }
-        .log-out:hover{
-            background-color: rgb(234, 184, 186);
-            
-        }
-
-
-    </style>
+  </style>
 </head>
 <body>
-    <header>
-        <div class="nav-container">
-            <div class="hamburger" id="hamburger">&#9776;</div>
-            <nav id="nav-menu" class="hidden">
-                <ul>
-                    <li>Game 1</li>
-                    <li>Game 2</li>
-                    <li>Game 3</li>
-                    <li>Game 4</li>
-                </ul>
-            </nav>
-        </div>
-        <div class="top-right">
-            <img src="coin-icon.png" alt="Coin Icon" class="coin-icon">
-            <span id="date"></span>
-        </div>
-    </header>
+  <div class="registration-container">
+    <h1>Registration Page</h1>
+    <form id="registration-form">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+      
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
 
-    <div class="container">
-        <img src="profile.jpg" alt="Profile Image" class="profile-img" id="profileImage">
-        <div class="info" id="username">Username: JohnDoe</div>
-        <div class="info" id="email">Email: johndoe@example.com</div>
-        <div class="info" id="loginDate">Login Date: 2024-07-05</div>
-        <div class="info" id="loginTime">Login Time: 2024-07-05</div>
-        <div><input type="button" value="Log Out" class="log-out" onclick="logOut()"></div>
+      <label for="phone">Phone:</label>
+      <input type="tel" id="phone" name="phone" required>
+
+      <label for="profile-pic">Upload Profile Picture:</label>
+      <input type="file" id="profile-pic" name="profile-pic" accept="image/*" required>
+
+      <button type="submit">Register</button>
+    </form>
+
+    <h2>Stored Data</h2>
+    <div id="stored-data">
+      <p>Name: <span id="stored-name"></span></p>
+      <p>Email: <span id="stored-email"></span></p>
+      <p>Phone: <span id="stored-phone"></span></p>
+      <p>Profile Picture:</p>
+      <img id="stored-profile-pic" alt="Profile Picture" style="max-width: 100px;">
     </div>
+  </div>
 
+  <script>
+    document.getElementById('registration-form').addEventListener('submit', function(event) {
+  event.preventDefault();
 
-    <script >
-        document.addEventListener('DOMContentLoaded', () => {
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.getElementById('nav-menu');
-    const dateElement = document.getElementById('date');
+  const name = document.getElementById('name').value;
+  const email = document.getElementById('email').value;
+  const phone = document.getElementById('phone').value;
+  const profilePicInput = document.getElementById('profile-pic');
+  
+  const reader = new FileReader();
+  
+  reader.onload = function() {
+    const profilePic = reader.result;
+    console.log(profilePic);
+    localStorage.setItem('name', name);
+    localStorage.setItem('email', email);
+    localStorage.setItem('phone', phone);
+    localStorage.setItem('profilePic', profilePic);
 
-    hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('hidden');
-    });
-
-    const updateDate = () => {
-        const now = new Date();
-        const dateString = now.toLocaleDateString();
-        dateElement.textContent = dateString;
-    };
-
-    updateDate();
+    displayStoredData();
+  };
+  reader.readAsDataURL(profilePicInput.files[0]);
 });
 
-    </script>
+function displayStoredData() {
+  document.getElementById('stored-name').textContent = localStorage.getItem('name');
+  document.getElementById('stored-email').textContent = localStorage.getItem('email');
+  document.getElementById('stored-phone').textContent = localStorage.getItem('phone');
+  
+  const profilePic = localStorage.getItem('profilePic');
+
+console.log(profilePic);  
+if (profilePic) {
+    document.getElementById('stored-profile-pic').src = profilePic;
+  }
+  
+}
+
+// Display stored data on page load
+window.onload = displayStoredData;
+
+  </script>
 </body>
 </html>

@@ -8,55 +8,113 @@ function openLogin(){
 }
 
 
+// --------------------------------------------------------------------------------------------------------------------------------------------
+// This code is for registration:-
 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@(gmail\.com|logic-square\.com)$/;
+const passwordRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*])[A-Z].{7,}$/;
 
+function loginValidation(event) {
+    event.preventDefault(); // Prevent the form from submitting and refreshing the page
 
-// This code is for login
-
-const users=[
-    {Name:"Mrinal Bera", username:"mrinal@logic-square.com", password:"Mrinal@123",profileImage:"./Images/ProfilePic.jpeg"},
-    {Name:"Kiran Debnath",username:"Kiran@logic-square.com",password:'Kiran@123',profileImage:"./Images/Kiran.jpg"},
-    {Name:"Abhijit Jana",username:"Abhijit@logic-square.com",password:'Abhijit@123',profileImage:"./Images/Abhijit.jpg"}
-]
-
-localStorage.setItem('user', JSON.stringify(users))
-
-function loginValidation(){
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
-    
-    var passw=  /^[A-Za-z]\w{7,14}$/;
-    // if()
-    
-    // Check if the email and password match any user in the array
-    const user = users.find(u => u.username === email && u.password === password);
-    
-    //Store the currentUser in local storage then in LandingPage(main.html)
-    //I will access the currentUser and his properties
+    const message = document.getElementById("loginError");
 
-    localStorage.setItem('currentUser', JSON.stringify(user))
+    let getUser=localStorage.getItem('registeredUser')
+    let users=JSON.parse(getUser)
     
-    //This will store the current login time will fetch from main.js
-    //As we are not using any token so we store it in localStorage
+    let user=users.find(u=>u.email===email && u.password===password )
+    
+    // Clear any previous message
+    message.innerText = '';
 
-    if(user){
-        
-        window.location.href='./main.html'
-        
-        return false;
-    }
-    else{
-        const errMsg=document.getElementById('loginError')
-        errMsg.textContent='Invalid email or password. Please try again'
-        return false;
+    // Validate email
+    if (!emailRegex.test(email)) {
+        message.innerText = 'Invalid email format. Must be example@gmail.com or example@logic-square.com.';
+        return false; // Stop the form from processing further
     }
 
+    // Validate password
+    if (!passwordRegex.test(password)) {
+        message.innerText = 'Invalid password format. Must start with an uppercase letter, be at least 8 characters long, and contain at least one special character.';
+        return false; // Stop the form from processing further
+    }
+    
+    if (user) {
+        // Store the currentUser in localStorage
+        localStorage.setItem('currentUser', JSON.stringify(user));
+        
+        // Redirect to main.html
+        window.location.href = './CoinTest.html';
+    } else {
+        // Display an error message if the login credentials are invalid
+        message.innerText = 'Invalid email or password. Please try again.';
+    }
+
+    return false; // Prevent form submission
+}
+
+document.getElementById('registerForm').addEventListener('submit', doRegister);
+
+function doRegister(event) {
+    event.preventDefault(); // Prevent the form from submitting and refreshing the page
+
+    let getUser = localStorage.getItem("registeredUser");
+    const users = JSON.parse(getUser) || []; // Ensure users is always an array
+
+    const name = document.getElementById('regname').value;
+    const email = document.getElementById('regemail').value;
+    const pass = document.getElementById("regpassword").value;
+    const checkbox = document.getElementById('checkadmin').checked;
+    const imageUrl = document.getElementById("imgurl").value;
+    const message = document.getElementById("message-reg");
+    const success=document.getElementById('success');
+
+    // Clear any previous message
+    message.innerText = '';
+
+    // Validate email
+    if (!emailRegex.test(email)) {
+        message.innerText = 'Invalid email format. Must be example@gmail.com or example@logic-square.com.';
+        return false; // Stop the form from processing further
+    }
+
+    // Validate password
+    if (!passwordRegex.test(pass)) {
+        message.innerText = 'Invalid password format. Must start with an uppercase letter, be at least 8 characters long, and contain at least one special character.';
+        return false; // Stop the form from processing further
+    }
+
+    // Check if the user already exists using the `some` method
+    const userExists = users.some(u => u.email === email);
+    if (userExists) {
+        // Display a message if the user already exists
+        message.innerText = 'User email Exists';
+        
+        return false; // Stop further execution of the function
+    }
+
+    // Define the new user object
+    const user = {
+        name: name,
+        email: email,
+        password: pass,
+        isAdmin: checkbox,
+        image: imageUrl
+    };
+
+    // Add the new user to the array
+    users.push(user);
+    // Store the updated array back in localStorage
+    localStorage.setItem('registeredUser', JSON.stringify(users));
+    success.innerText="User succesfully registered!"
 }
 
 
 
 
-
+// -----------------------------------------------------------------------------------
 //This code for loggle between show and hide password button
 function togglePasswordVisibility() {
     const passwordField = document.getElementById('password');
@@ -65,6 +123,24 @@ function togglePasswordVisibility() {
     if (passwordField.type === 'password') {
         passwordField.type = 'text';
         // toggleIcon.classList.add('show-password');
+        toggleIcon.src='./Images/OpenEye.png'
+    } else {
+        passwordField.type = 'password';
+        // toggleIcon.classList.remove('show-password');
+        
+        toggleIcon.src='./Images/CloseEye.png'
+    }
+}
+
+// For registration password
+function resPasswordVisibility() {
+    const passwordField = document.getElementById("regpassword");
+    const toggleIcon = document.getElementById('res-password-hidden');
+    
+    if (passwordField.type === 'password') {
+        passwordField.type = 'text';
+        // toggleIcon.classList.add('show-password');
+        
         toggleIcon.src='./Images/OpenEye.png'
     } else {
         passwordField.type = 'password';

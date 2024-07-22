@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Table Row Example</title>
+</head>
+<body>
+
+<form id="dataForm">
+    <input type="hidden" id="id">
+    <input type="text" id="avatarUrl" placeholder="Avatar URL" required>
+    <input type="text" id="name" placeholder="Name" required>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="hidden" id="editIndex">
+    <button type="submit">Submit</button>
+</form>
+
+<table id="dataTable" border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Avatar</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Rows will be added here dynamically -->
+    </tbody>
+</table>
+
+<script>
+
+document.getElementById('dataForm').addEventListener('submit', async function(event) {
+    event.preventDefault();
+
+    const id = document.getElementById('id').value;
+    const avatarUrl = document.getElementById('avatarUrl').value;
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const editIndex = document.getElementById('editIndex').value;
+
+    const data = {
+        avatar: avatarUrl,
+        name: name,
+        email: email
+    };
+
+    if (editIndex) {
+        // Edit existing row
+        const success = await updateDataOnServer(id, data);
+        if (success) {
+            updateRow(editIndex, data);
+        } else {
+            alert('Error updating data');
+        }
+    } else {
+        // Add new row
+        addRow(id, data);
+    }
+
+    this.reset();
+    document.getElementById('editIndex').value = '';
+});
+
+function addRow(id, data) {
+    const table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+    const newRow = table.insertRow();
+
+    const idCell = newRow.insertCell(0);
+    const avatarCell = newRow.insertCell(1);
+    const nameCell = newRow.insertCell(2);
+    const emailCell = newRow.insertCell(3);
+    const actionsCell = newRow.insertCell(4);
+
+    idCell.innerHTML = id;
+    avatarCell.innerHTML = `<img src="${data.avatar}" alt="Avatar" width="50">`;
+    nameCell.innerHTML = data.name;
+    emailCell.innerHTML = data.email;
+    actionsCell.innerHTML = '<button onclick="editRow(this)">Edit</button> <button onclick="deleteRow(this)">Delete</button>';
+}
+
+function editRow(button) {
+    const row = button.parentElement.parentElement;
+    const id = row.cells[0].innerHTML;
+    const avatar = row.cells[1].querySelector('img').src;
+    const name = row.cells[2].innerHTML;
+    const email = row.cells[3].innerHTML;
+    const rowIndex = row.rowIndex - 1;
+
+    document.getElementById('id').value = id;
+    document.getElementById('avatarUrl').value = avatar;
+    document.getElementById('name').value = name;
+    document.getElementById('email').value = email;
+    document.getElementById('editIndex').value = rowIndex;
+}
+
+function updateRow(index, data) {
+    const table = document.getElementById('dataTable').getElementsByTagName('tbody')[0];
+    const row = table.rows[index];
+
+    row.cells[1].innerHTML = `<img src="${data.avatar}" alt="Avatar" width="50">`;
+    row.cells[2].innerHTML = data.name;
+    row.cells[3].innerHTML = data.email;
+}
+
+async function updateDataOnServer(id, data) {
+    try {
+        const response = await fetch(`https://api.example.com/data/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+            const updatedData = await response.json();
+            console.log('Data updated successfully:', updatedData);
+            return true;
+        } else {
+            console.error('Error updating data:', response.status);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error updating data:', error);
+        return false;
+    }
+}
+
+async function deleteRow(button) {
+    const row = button.parentElement.parentElement;
+    const id = row.cells[0].innerHTML;
+
+    const success = await deleteDataFromServer(id);
+    if (success) {
+        row.remove();
+    } else {
+        alert('Error deleting data');
+    }
+}
+
+async function deleteDataFromServer(id) {
+    try {
+        const response = await fetch(`https://api.example.com/data/${id}`, {
+            method: 'DELETE'
+        });
+
+        if (response.ok) {
+            console.log('Data deleted successfully');
+            return true;
+        } else {
+            console.error('Error deleting data:', response.status);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error deleting data:', error);
+        return false;
+    }
+}
+
+
+</script>
+
+</body>
+</html>

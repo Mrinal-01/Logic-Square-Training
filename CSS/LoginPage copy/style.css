@@ -17,7 +17,7 @@
 
 .card{
     width: 350px;
-    height: 500px;
+    height: 80vh;
     box-shadow: 0 0 40px 20px rgb(73, 73, 77);
     perspective: 1000px;
     
@@ -47,6 +47,9 @@ h2{
     transform-style: preserve-3d;
     transition: transform 1s;
     
+}
+.is-admin{
+    line-height: 10px;
 }
 .card-front, .card-back{
     position:absolute;
@@ -113,6 +116,25 @@ button{
 
     
 }
+#res-password-hidden{
+    position: absolute;
+    width: 20px;
+    height:20px ;
+    top: 25% ;
+    right: 10px;
+    cursor: pointer;
+
+    
+}
+#message{
+    color: darkred;
+}
+#message-reg{
+    color: darkred;
+}
+#success{
+    color:rgb(71, 228, 71);
+}
 .submit-btn::after{
     content: '\27a4';
     color: #333;
@@ -134,7 +156,7 @@ span{
     margin-left: 10px;
 }
 .card .btn{
-    margin-top:70px;
+    margin-top:50px;
 }
 
 .error {
