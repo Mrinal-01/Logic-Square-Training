@@ -57,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const sellPrice = document.getElementById('sellPrice').value;
     const size = document.getElementById('size').value;
     const color = document.getElementById('color').value;
+    const quantity = document.getElementById('quantity').value;
     const image=document.getElementById('image').value;
 
     const product = {
@@ -68,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sellPrice,
       color,
       size,
+      quantity,
       image
 
     };
@@ -96,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
     table.border = "1";
     table.classList.add('table-style')
   let headerRow = document.createElement("tr");
-    let headers = ["Product ID", "Product Name", "Category",'Description', "Price", "Sell Price", "Color","Size","Image"];
+    let headers = ["Product ID", "Product Name", "Category",'Description', "Price", "Sell Price", "Color","Size","Image","Quantity"];
     headers.forEach(headerText => {
       let header = document.createElement("th");
       header.textContent = headerText;
@@ -144,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
       table.classList.add('table-style')
 
       let headerRow = document.createElement("tr");
-      let headers = ["Product ID", "Product Name", "Category",'Description', "Price", "Sell Price", "Color","Size","Image"];
+      let headers = ["Product ID", "Product Name", "Category",'Description', "Price", "Sell Price", "Color","Size","Image","Quantity"];
       headers.forEach(headerText => {
       let header = document.createElement("th");
       header.textContent = headerText;
@@ -177,4 +179,9 @@ function openNav() {
 function closeNav() {
   document.getElementById("mySidebar").style.width = "0";
   document.getElementById("main").style.marginLeft= "0";
+}
+
+
+function logOut(){
+  window.location.href="../../LoginPage copy/index.html"
 }

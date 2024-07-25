@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <style>
+    /* Basic styles for the product list and buttons */
+    .product-item {
+      border: 1px solid #ddd;
+      margin: 10px;
+      padding: 10px;
+      display: inline-block;
+      width: 200px;
+      text-align: center;
+    }
+    .product-item img {
+      width: 100%;
+      height: auto;
+    }
+    .btn {
+      display: inline-block;
+      margin: 5px 0;
+      padding: 5px 10px;
+      color: #fff;
+      background-color: #007bff;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .btn:hover {
+      background-color: #0056b3;
+    }
+    .buy-cart {
+      margin-top: 10px;
+    }
+    .cart-icon {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* Modal styling */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 15% auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%;
+      max-width: 600px;
+    }
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* Cart item styling */
+    .cart-item {
+      border-bottom: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    .cart-item p {
+      margin: 5px 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Cart Icon -->
+  <div class="cart-icon" onclick="openCartModal()">
+    Cart (<span id="cartCount">0</span>)
+  </div>
+
+  <!-- Product List -->
+  <div id="productList"></div>
+
+  <!-- Cart Modal -->
+  <div id="cartModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closeCartModal()">&times;</span>
+      <h2>Your Cart</h2>
+      <div id="cartItems"></div>
+      <div id="cartTotal">
+        <p>Total Items: <span id="totalItems">0</span></p>
+        <p>Total Amount: ₹<span id="totalAmount">0</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const products = {
+        "Smartphone": [
+          {
+            "productId": "Mob001",
+            "productName": "Redmi Note 13Pro 5G",
+            "category": "Smartphone",
+            "description": "Redmi Note 13 Pro, 8GB, 256GB, 50MP+20MP, 32MP",
+            "price": "21000",
+            "sellPrice": "25000",
+            "size": "",
+            "color": "Cherry Red",
+            "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/q/c/y/-original-imah27s96vp5z7nh.jpeg?q=70"
+          },
+          {
+            "productId": "Mob002",
+            "productName": "Vivo T2 Pro",
+            "category": "Smartphone",
+            "description": "Vivo T2 Pro 5G, Ram 8GB, Storage 256GB, Rear Camera 64MP + 2MP, Front Camera 16MP",
+            "price": "27999",
+            "sellPrice": "23999",
+            "color": "Dune Gold",
+            "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/mobile/5/y/8/-original-imagtt4mhqrzjs9r.jpeg?q=70"
+          }
+        ],
+        "Cloths": [
+          {
+            "productId": "SHRT001",
+            "productName": "Casual Shirt",
+            "category": "Cloths",
+            "description": "Allen Solly Casual Shirts for Men",
+            "price": "1500",
+            "sellPrice": "1150",
+            "color": "Navy Blue",
+            "size": "S,M,XL",
+            "image": "https://rukminim2.flixcart.com/image/612/612/l45xea80/shirt/1/f/p/-original-imagf4se7sqs3pgr.jpeg?q=70"
+          }
+        ],
+        "Computer": [
+          {
+            "productId": "COMP001",
+            "productName": "HP Victus",
+            "category": "Computer",
+            "description": "HP Victus Intel Core i5 13th Gen 13420H - (16 GB/512 GB SSD/Windows 11 Home/6 GB Graphics/NVIDIA GeForce RTX 3050) 15-fa1327TX Gaming Laptop  (15.6 inch, Performance Blue, 2.3 Kg, With MS Office)",
+            "price": "92110",
+            "sellPrice": "72490",
+            "color": "Blue",
+            "size": "",
+            "image": "https://rukminim2.flixcart.com/image/312/312/xif0q/computer/n/x/r/-original-imahyj96gegews9v.jpeg?q=70"
+          }
+        ]
+      };
+
+      const currentUserEmail = 'user@example.com';
+
+      function displayProducts(products) {
+        const productList = document.getElementById('productList');
+        
+        for (const category in products) {
+          if (products.hasOwnProperty(category)) {
+            products[category].forEach(product => {
+              let productItem = document.createElement('div');
+              productItem.className = 'product-item';
+              
+              let productLink = document.createElement('a');
+              productLink.href = '#';
+
+              let productImage = document.createElement('img');
+              productImage.src = product.image;
+              productImage.alt = product.productName;
+              productLink.appendChild(productImage);
+
+              let productName = document.createElement('h3');
+              productName.textContent = product.productName;
+              productLink.appendChild(productName);
+
+              let productPrice = document.createElement('p');
+              productPrice.textContent = `₹${product.sellPrice}`;
+              productLink.appendChild(productPrice);
+
+              if (product.size) {
+                let productSize = document.createElement('p');
+                productSize.textContent = `Size: ${product.size}`;
+                productLink.appendChild(productSize);
+              }
+
+              let productColor = document.createElement('p');
+              productColor.textContent = `Color: ${product.color}`;
+              productLink.appendChild(productColor);
+
+              productItem.appendChild(productLink);
+
+              let buyCartDiv = document.createElement('div');
+              buyCartDiv.className = 'buy-cart';
+
+              let addToCartBtn = document.createElement('a');
+              addToCartBtn.href = '#';
+              addToCartBtn.textContent = 'Add To Cart';
+              addToCartBtn.classList.add('btn', 'btn-add-to-cart');
+              addToCartBtn.addEventListener('click', function(event) {
+                event.preventDefault();
+                addToCart(currentUserEmail, product.productId);
+              });
+
+              let buyNowBtn = document.createElement('a');
+              buyNowBtn.href = '#';
+              buyNowBtn.textContent = 'Buy Now';
+              buyNowBtn.classList.add('btn', 'btn-buy-now');
+
+              buyCartDiv.appendChild(addToCartBtn);
+              buyCartDiv.appendChild(buyNowBtn);
+              productItem.appendChild(buyCartDiv);
+
+              productList.appendChild(productItem);
+            });
+          }
+        }
+      }
+
+      function addToCart(email, productId) {
+        let userCart = JSON.parse(localStorage.getItem('userCart')) || {};
+        if (!userCart[email]) {
+          userCart[email] = [];
+        }
+
+        let productInCart = userCart[email].find(item => item.productId === productId);
+        if (productInCart) {
+          productInCart.quantity += 1;
+        } else {
+          userCart[email].push({ productId: productId, quantity: 1 });
+        }
+
+        localStorage.setItem('userCart', JSON.stringify(userCart));
+        updateCartCount(email);
+      }
+
+      function updateCartCount(email) {
+        let userCart = JSON.parse(localStorage.getItem('userCart')) || {};
+        let cartCount = userCart[email] ? userCart[email].reduce((acc, item) => acc + item.quantity, 0) : 0;
+        document.getElementById('cartCount').textContent = cartCount;
+      }
+
+      window.openCartModal = function() {
+        const email = currentUserEmail;
+        document.getElementById('cartModal').style.display = 'block';
+        displayCartItems(email);
+      }
+
+      window.closeCartModal = function() {
+        document.getElementById('cartModal').style.display = 'none';
+      }
+
+      function displayCartItems(email) {
+        const cartItemsContainer = document.getElementById('cartItems');
+        cartItemsContainer.innerHTML = '';
+
+        let userCart = JSON.parse(localStorage.getItem('userCart')) || {};
+        let cartItems = userCart[email] || [];
+        let totalItems = 0;
+        let totalAmount = 0;
+
+        cartItems.forEach(item => {
+          let product = getProductById(item.productId);
+          if (product) {
+            totalItems += item.quantity;
+            totalAmount += item.quantity * product.sellPrice;
+
+            let cartItem = document.createElement('div');
+            cartItem.className = 'cart-item';
+
+            let itemDetails = `
+              <p>${product.productName}</p>
+              <p>Price: ₹${product.sellPrice}</p>
+              <p>Quantity:
+                <button onclick="updateQuantity('${email}', '${item.productId}', -1)">-</button>
+                ${item.quantity}
+                <button onclick="updateQuantity('${email}', '${item.productId}', 1)">+</button>
+              </p>
+              <p>Total: ₹${item.quantity * product.sellPrice}</p>
+            `;
+
+            cartItem.innerHTML = itemDetails;
+            cartItemsContainer.appendChild(cartItem);
+          }
+        });
+
+        document.getElementById('totalItems').textContent = totalItems;
+        document.getElementById('totalAmount').textContent = totalAmount;
+      }
+
+      function getProductById(productId) {
+        for (const category in products) {
+          if (products.hasOwnProperty(category)) {
+            let product = products[category].find(product => product.productId === productId);
+            if (product) {
+              return product;
+            }
+          }
+        }
+        return null;
+      }
+
+      window.updateQuantity = function(email, productId, change) {
+        let userCart = JSON.parse(localStorage.getItem('userCart')) || {};
+        let productInCart = userCart[email].find(item => item.productId === productId);
+
+        if (productInCart) {
+          productInCart.quantity += change;
+          if (productInCart.quantity <= 0) {
+            userCart[email] = userCart[email].filter(item => item.productId !== productId);
+          }
+
+          localStorage.setItem('userCart', JSON.stringify(userCart));
+          updateCartCount(email);
+          displayCartItems(email);
+        }
+      }
+
+      displayProducts(products);
+      updateCartCount(currentUserEmail);
+    });
+  </script>
+</body>
+</html>

@@ -1,229 +1,341 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>BuyMe</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-<body>
-
-<header class="header">
-    <div class="logo">
-        <img src="./Images/buyme-high-resolution-logo-transparent.png" alt="Logo">  
-    </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Search for Products, Brands and More">
-        <img src="./Images/search.svg" alt="Search Icon">
-    </div>
-    <div class="menu">
-        <a href="#" class="login"><img src="./Images/profile.png" alt="Login Icon"> Login <img id="arrow" src="./Images/down-arrow.png"  style="padding: 5px; height: 13px;"  onmouseover="hover(this);" onmouseout="unhover(this);"></a>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+  </head>
+  <body>
+    <header class="header">
+      <div class="logo">
+        <img
+          src="./Images/buyme-high-resolution-logo-transparent.png"
+          alt="Logo"
+        />
+      </div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search for Products, Brands and More" />
+        <img src="./Images/search.svg" alt="Search Icon" />
+      </div>
+      <div class="menu">
+        <a href="#" class="login" id="profileLink">
+            <img src="./Images/profile.png" alt="Login Icon" id="profile-image"/> Profile
+            <img id="arrow" src="./Images/down-arrow.png" style="padding: 5px; height: 13px" onmouseover="hover(this);" onmouseout="unhover(this);"/>
+        </a>
+        <div class="dropdown-content" id="dropdownMenu">
+            <a href="./AdminPage/admin.html" target="_blank">Admin Login</a>
+        </div>
         
-        <a href="#" class="cart"><img src="./Images/shopping-cart.png" alt="Cart Icon"> Cart</a>
-        
+        <a href="#" class="cart">
+            <img src="./Images/shopping-cart.png" alt="Cart Icon" />
+        </a>
+        <div class="cart-icon">
+            <span id="cartCount">0</span>
+        </div>
         <a href="#" class="seller">Become a Seller</a>
-        
         <a href="#" class="more">...</a>
     </div>
-</header>
+    </header>
 
-
-<div class="container">
-  <aside class="sidebar">
-      <h2>Categories</h2>
-      <ul>
+    <div class="container">
+      <aside class="sidebar">
+        <h2>Categories</h2>
+        <ul>
+          <!-- The data-value in a tag is connected with the menuClicked data in the localStorage -->
           <a href="#"><li>Home</li></a>
-          <a href="./ProductPage/products.html"><li>Cloths <img src="Images/right-arrow.png" alt="" srcset="" style=" height: 13px;"  onmouseover="sideHover(this);" onmouseout="sideUnhover(this);"></li></a>
-          <a href="#"><li>Shoes <img src="Images/right-arrow.png" alt="" srcset="" style=" height: 13px;" onmouseover="sideHover(this);" onmouseout="sideUnhover(this);"></li></a>
-          <a href="#"><li>Computers <img src="Images/right-arrow.png" alt="" srcset="" style=" height: 13px;" onmouseover="sideHover(this);" onmouseout="sideUnhover(this);"></li></a>
-          <a href=""><li>Electronics <img src="Images/right-arrow.png" alt="" srcset="" style=" height: 13px;" onmouseover="sideHover(this);" onmouseout="sideUnhover(this);"></li></a>
-          <a href=""><li>Home Decore <img src="Images/right-arrow.png" alt="" srcset="" style=" height: 13px;" onmouseover="sideHover(this);" onmouseout="sideUnhover(this);"></li></a>
-          <a href=""><li>More ...</li></a>
-      </ul>
-      <div class="left-side">
-        <img src="https://opencart.dostguru.com/OCSN/shopnow_01/image/cache/catalog/left-banner-01-270x400.png" alt="" srcset="">
-      </div>
-  </aside>
-  <main class="main-content">
-      <div class="slideshow-container">
+          <a href="#" onclick="showProducts(this)" data-value="Cloths"
+            ><li>
+              Cloths
+              <img
+                src="Images/right-arrow.png"
+                alt=""
+                srcset=""
+                style="height: 13px"
+                onmouseover="sideHover(this);"
+                onmouseout="sideUnhover(this);"
+              /></li
+          ></a>
+          <a href="#" onclick="showProducts(this)" data-value="Shoes"
+            ><li>
+              Shoes
+              <img
+                src="Images/right-arrow.png"
+                alt=""
+                srcset=""
+                style="height: 13px"
+                onmouseover="sideHover(this);"
+                onmouseout="sideUnhover(this);"
+              /></li
+          ></a>
+          <a href="#" onclick="showProducts(this)" data-value="Computer"
+            ><li>
+              Computers
+              <img
+                src="Images/right-arrow.png"
+                alt=""
+                srcset=""
+                style="height: 13px"
+                onmouseover="sideHover(this);"
+                onmouseout="sideUnhover(this);"
+              /></li
+          ></a>
+          <a href="#" onclick="showProducts(this)" data-value="Smartphone"
+            ><li>
+              Smartphone
+              <img
+                src="Images/right-arrow.png"
+                alt=""
+                srcset=""
+                style="height: 13px"
+                onmouseover="sideHover(this);"
+                onmouseout="sideUnhover(this);"
+              /></li
+          ></a>
+          <a href="#" onclick="showProducts(this)" data-value="Home"
+            ><li>
+              Home Decore
+              <img
+                src="Images/right-arrow.png"
+                alt=""
+                srcset=""
+                style="height: 13px"
+                onmouseover="sideHover(this);"
+                onmouseout="sideUnhover(this);"
+              /></li
+          ></a>
+          <a href="#"><li>More ...</li></a>
+        </ul>
+        <div class="left-side">
+          <img
+            src="https://opencart.dostguru.com/OCSN/shopnow_01/image/cache/catalog/left-banner-01-270x400.png"
+            alt=""
+            srcset=""
+          />
+        </div>
+      </aside>
+      <main class="main-content">
+        <div class="slideshow-container">
           <div class="slide fade">
-              <a href="#">
-                <img src="https://opencart.dostguru.com/OCSN/shopnow_01/image/cache/catalog/slider/11-1470x414.png" >
-              </a>
+            <a href="#">
+              <img
+                src="https://opencart.dostguru.com/OCSN/shopnow_01/image/cache/catalog/slider/11-1470x414.png"
+              />
+            </a>
           </div>
           <div class="slide fade">
-              <a href="#">
-                <img src="https://opencart.dostguru.com/OCSN/shopnow_01/image/cache/catalog/slider/00-1470x414.png" >
-              </a>
+            <a href="#">
+              <img
+                src="https://opencart.dostguru.com/OCSN/shopnow_01/image/cache/catalog/slider/00-1470x414.png"
+              />
+            </a>
           </div>
           <div class="slide fade">
-              <a href="#">
-                <img src="https://rukminim2.flixcart.com/fk-p-flap/1000/170/image/3a0edbfa89f89763.jpg?q=80" >
-              </a>
+            <a href="#">
+              <img
+                src="https://rukminim2.flixcart.com/fk-p-flap/1000/170/image/3a0edbfa89f89763.jpg?q=80"
+              />
+            </a>
           </div>
           <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
           <a class="next" onclick="plusSlides(1)">&#10095;</a>
-      </div>
-      <div class="info-section">
+        </div>
+        <div class="info-section">
           <div class="info">
-              <img src="./Images/24-hour-service.png" alt="Support 24/7">
-              <p><b>Support 24/7</b><br>We support online 24 hours a day</p>
+            <img src="./Images/24-hour-service.png" alt="Support 24/7" />
+            <p><b>Support 24/7</b><br />We support online 24 hours a day</p>
           </div>
           <div class="info">
-              <img src="./Images/return.png" alt="Free Return">
-              <p><b>Free Return</b><br>30 days money back guarantee!</p>
+            <img src="./Images/return.png" alt="Free Return" />
+            <p><b>Free Return</b><br />30 days money back guarantee!</p>
           </div>
           <div class="info">
-              <img src="./Images/free-delivery.png" alt="Free Shipping">
-              <p><b>Free Shipping</b><br>Free shipping on all orders</p>
+            <img src="./Images/free-delivery.png" alt="Free Shipping" />
+            <p><b>Free Shipping</b><br />Free shipping on all orders</p>
           </div>
           <div class="info">
-              <img src="./Images/secure-payment.png" alt="Safe Shopping">
-              <p><b>Safe Shopping</b><br>Safe Shopping guarantee</p>
+            <img src="./Images/secure-payment.png" alt="Safe Shopping" />
+            <p><b>Safe Shopping</b><br />Safe Shopping guarantee</p>
           </div>
-      </div>
-  </main>
-</div>
+        </div>
+      </main>
+    </div>
 
-
-<!-- Adding products in the page -->
-<div class="featured-products">
-  <h2><i class="fa fa-th-list" style="font-size:22px;color:rgb(119, 122, 122);padding: 2px;"></i>Featured Products</h2>
-  <div class="product-container">
-      <div class="product">
+    <!-- Adding products in the page -->
+    <div class="featured-products">
+      <h2>
+        <i
+          class="fa fa-th-list"
+          style="font-size: 22px; color: rgb(119, 122, 122); padding: 2px"
+        ></i
+        >Featured Products
+      </h2>
+      <div class="product-container">
+        <div class="product">
           <div class="sale-badge">Sale</div>
-          <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/computer/o/o/n/-original-imahfj75bjbxkhqd.jpeg?q=70&crop=false" alt="Product Image">
+          <img
+            src="https://rukminim2.flixcart.com/image/128/128/xif0q/computer/o/o/n/-original-imahfj75bjbxkhqd.jpeg?q=70&crop=false"
+            alt="Product Image"
+          />
           <div class="product-details">
-              <div class="rating">★★★★</div>
-              <p class="product-name">HP LP3065</p>
-              <p class="product-price">₹ 56999.00 <span class="original-price">₹ 63000.00</span></p>
+            <div class="rating">★★★★</div>
+            <p class="product-name">HP LP3065</p>
+            <p class="product-price">
+              ₹ 56999.00 <span class="original-price">₹ 63000.00</span>
+            </p>
           </div>
           <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <div class="product">
-          <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/computer/u/8/n/-original-imagfdeqhmfry6e8.jpeg?q=70&crop=false" alt="Product Image">
+        </div>
+        <div class="product">
+          <img
+            src="https://rukminim2.flixcart.com/image/128/128/xif0q/computer/u/8/n/-original-imagfdeqhmfry6e8.jpeg?q=70&crop=false"
+            alt="Product Image"
+          />
           <div class="product-details">
-              <div class="rating">★★★★</div>
-              <p class="product-name">iMac</p>
-              <p class="product-price">₹ 95000.00 <span class="original-price">₹ 139990.00</span></p>
+            <div class="rating">★★★★</div>
+            <p class="product-name">iMac</p>
+            <p class="product-price">
+              ₹ 95000.00 <span class="original-price">₹ 139990.00</span>
+            </p>
           </div>
           <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <div class="product">
-          <img src="https://rukminim1.flixcart.com/image/1664/1664/xif0q/computer/b/x/h/-original-imagz92r5ukpzy7a.jpeg?q=80&crop=false" alt="Product Image">
+        </div>
+        <div class="product">
+          <img
+            src="https://rukminim1.flixcart.com/image/1664/1664/xif0q/computer/b/x/h/-original-imagz92r5ukpzy7a.jpeg?q=80&crop=false"
+            alt="Product Image"
+          />
           <div class="product-details">
-              <div class="rating">★★★★★</div>
-              <p class="product-name">MSI Katana A15</p>
-              <p class="product-price">₹ 94500<span class="original-price">₹ 117990</span></p>
+            <div class="rating">★★★★★</div>
+            <p class="product-name">MSI Katana A15</p>
+            <p class="product-price">
+              ₹ 94500<span class="original-price">₹ 117990</span>
+            </p>
           </div>
           <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <div class="product">
-          <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/tablet/o/k/w/-original-imagj72ttsqcrehk.jpeg?q=80&crop=false" alt="Product Image">
+        </div>
+        <div class="product">
+          <img
+            src="https://rukminim2.flixcart.com/image/128/128/xif0q/tablet/o/k/w/-original-imagj72ttsqcrehk.jpeg?q=80&crop=false"
+            alt="Product Image"
+          />
           <div class="product-details">
-              <div class="rating">★★★★★</div>
-              <p class="product-name">Apple iPad (10th Gen)</p>
-              <p class="product-price">₹ 34999</p>
+            <div class="rating">★★★★★</div>
+            <p class="product-name">Apple iPad (10th Gen)</p>
+            <p class="product-price">₹ 34999</p>
           </div>
           <button class="add-to-cart">Add to Cart</button>
-      </div>
-      <div class="product">
-        <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/mobile/i/5/1/-original-imagzm8pvabtmeys.jpeg?q=70&crop=false" alt="Product Image">
-        <div class="product-details">
+        </div>
+        <div class="product">
+          <img
+            src="https://rukminim2.flixcart.com/image/128/128/xif0q/mobile/i/5/1/-original-imagzm8pvabtmeys.jpeg?q=70&crop=false"
+            alt="Product Image"
+          />
+          <div class="product-details">
             <div class="rating">★★★★★</div>
             <p class="product-name">SAMSUNG Galaxy S23 Ultra 5G</p>
-            <p class="product-price">₹ 89999<span class="original-price">₹ 149990</span></p>
+            <p class="product-price">
+              ₹ 89999<span class="original-price">₹ 149990</span>
+            </p>
+          </div>
+          <button class="add-to-cart">Add to Cart</button>
         </div>
-        <button class="add-to-cart">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="https://rukminim2.flixcart.com/image/128/128/xif0q/headphone/y/6/i/-original-imahfcgvhjzj2xgp.jpeg?q=70&crop=false" alt="Product Image">
-      <div class="product-details">
-          <div class="rating">★★★★★</div>
-          <p class="product-name">iPod Nano</p>
-          <p class="product-price">₹ 11999<span class="original-price">₹ 14999</span></p>
+        <div class="product">
+          <img
+            src="https://rukminim2.flixcart.com/image/128/128/xif0q/headphone/y/6/i/-original-imahfcgvhjzj2xgp.jpeg?q=70&crop=false"
+            alt="Product Image"
+          />
+          <div class="product-details">
+            <div class="rating">★★★★★</div>
+            <p class="product-name">iPod Nano</p>
+            <p class="product-price">
+              ₹ 11999<span class="original-price">₹ 14999</span>
+            </p>
+          </div>
+          <button class="add-to-cart">Add to Cart</button>
+        </div>
       </div>
-      <button class="add-to-cart">Add to Cart </button>
-      
-  </div>
-  </div>
-  <footer>
-    <div class="footer-top">
-        <div class="newsletter">
+
+      <footer>
+        <div class="footer-top">
+          <div class="newsletter">
             <h3>Newsletter</h3>
             <form id="newsletter-form">
-                <input type="email" id="newsletter-email" placeholder="Enter your email..." required>
-                <button type="submit">Subscribe</button>
+              <input
+                type="email"
+                id="newsletter-email"
+                placeholder="Enter your email..."
+                required
+              />
+              <button type="submit">Subscribe</button>
             </form>
+          </div>
         </div>
-    </div>
-    <div class="footer-middle">
-        <div class="footer-column">
+        <div class="footer-middle">
+          <div class="footer-column">
             <h4>My Account</h4>
             <ul>
-                <li><a href="#">My Account</a></li>
-                <li><a href="#">Order History</a></li>
-                <li><a href="#">Wish List</a></li>
-                <li><a href="#">Newsletter</a></li>
-                <li><a href="#">Gift Certificates</a></li>
+              <li><a href="#">My Account</a></li>
+              <li><a href="#">Order History</a></li>
+              <li><a href="#">Wish List</a></li>
+              <li><a href="#">Newsletter</a></li>
+              <li><a href="#">Gift Certificates</a></li>
             </ul>
-        </div>
-        <div class="footer-column">
+          </div>
+          <div class="footer-column">
             <h4>Information</h4>
             <ul>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Delivery Information</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Site Map</a></li>
+              <li><a href="#">About Us</a></li>
+              <li><a href="#">Delivery Information</a></li>
+              <li><a href="#">Privacy Policy</a></li>
+              <li><a href="#">Terms & Conditions</a></li>
+              <li><a href="#">Site Map</a></li>
             </ul>
-        </div>
-        <div class="footer-column">
+          </div>
+          <div class="footer-column">
             <h4>Customer Service</h4>
             <ul>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">Returns</a></li>
-                <li><a href="#">Specials</a></li>
-                <li><a href="#">Affiliates</a></li>
-                <li><a href="#">Brands</a></li>
+              <li><a href="#">Contact Us</a></li>
+              <li><a href="#">Returns</a></li>
+              <li><a href="#">Specials</a></li>
+              <li><a href="#">Affiliates</a></li>
+              <li><a href="#">Brands</a></li>
             </ul>
-        </div>
-        <div class="footer-column">
+          </div>
+          <div class="footer-column">
             <h4>Contact Us</h4>
             <ul>
-                <li><a href="#">Shopnow</a></li>
-                <li><a href="mailto:Prestashopdemo@Hotmail.Com">bume@gmail.Com</a></li>
-                <li><a href="tel:123456789">8172059732</a></li>
-                <li><a href="#">Kolkata</a></li>
+              <li><a href="#">Shopnow</a></li>
+              <li>
+                <a href="mailto:Prestashopdemo@Hotmail.Com">bume@gmail.Com</a>
+              </li>
+              <li><a href="tel:123456789">8172059732</a></li>
+              <li><a href="#">Kolkata</a></li>
             </ul>
+          </div>
         </div>
-    </div>
-    <div class="footer-bottom">
-        <p>Powered by Opencart Demo Store &copy; 2017</p>
-        <div class="footer-social">
-            <a href="#"><img src="Images/facebook.png" alt="Facebook"></a>
-            <a href="#"><img src="Images/twitter.png" alt="Twitter"></a>
-            <a href="#"><img src="Images/instagram.png" alt="Instagram"></a>
-            <a href="#"><img src="Images/youtube.png" alt="YouTube"></a>
-            <a href="#"><img src="Images/google.png" alt="Google+"></a>
+        <div class="footer-bottom">
+          <p>Powered by Opencart Demo Store &copy; 2017</p>
+          <div class="footer-social">
+            <a href="#"><img src="Images/facebook.png" alt="Facebook" /></a>
+            <a href="#"><img src="Images/twitter.png" alt="Twitter" /></a>
+            <a href="#"><img src="Images/instagram.png" alt="Instagram" /></a>
+            <a href="#"><img src="Images/youtube.png" alt="YouTube" /></a>
+            <a href="#"><img src="Images/google.png" alt="Google+" /></a>
+          </div>
+          <!-- <div class="footer-payment">
+                <img src="mastercard-icon.png" alt="MasterCard">
+                <img src="visa-icon.png" alt="Visa">
+                <img src="paypal-icon.png" alt="PayPal">
+            </div> -->
         </div>
-        <!-- <div class="footer-payment">
-            <img src="mastercard-icon.png" alt="MasterCard">
-            <img src="visa-icon.png" alt="Visa">
-            <img src="paypal-icon.png" alt="PayPal">
-        </div> -->
+      </footer>
     </div>
-</footer>
 
-</div>
-
-
-
-
-
-
-
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+  </body>
 </html>
