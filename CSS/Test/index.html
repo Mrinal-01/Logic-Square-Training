@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cart Page</title>
+  <style>
+    * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background-color: #f1f1f1;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #2874f0;
+  padding: 10px 20px;
+  color: white;
+}
+
+.header .logo img {
+  height: 40px;
+}
+
+.header .search-bar input {
+  width: 500px;
+  padding: 10px;
+  border: none;
+  border-radius: 2px;
+}
+
+.header .user-menu {
+  font-weight: bold;
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.cart-container {
+  width: 60%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin-right: 20px;
+}
+
+.cart-header {
+  padding: 20px;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-items {
+  padding: 20px;
+}
+
+.cart-item {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.cart-item-details {
+  flex: 1;
+  padding-left: 20px;
+}
+
+.cart-item-details h4 {
+  margin-bottom: 10px;
+}
+
+.cart-item-details p {
+  margin-bottom: 5px;
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.quantity-controls {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-controls button {
+  padding: 5px 10px;
+  border: none;
+  background-color: #ddd;
+  cursor: pointer;
+}
+
+.quantity-controls input {
+  width: 30px;
+  text-align: center;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+  margin: 0 5px;
+}
+
+.price-details {
+  width: 30%;
+  background-color: white;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.price-details h3 {
+  margin-bottom: 20px;
+}
+
+.price-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.price-item.total {
+  font-weight: bold;
+}
+
+.savings {
+  margin: 20px 0;
+  color: green;
+}
+
+.place-order-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #fb641b;
+  color: white;
+  text-align: center;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1.2em;
+  margin-top: 10px;
+}
+
+.place-order-btn:hover {
+  background-color: #e55917;
+}
+
+
+
+
+
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/fk-plus_3b0baa.png" alt="Flipkart Logo">
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="Search for products, brands and more">
+    </div>
+    <div class="user-menu">
+      <span>MRINAL</span>
+    </div>
+  </div>
+  <div class="main-container">
+    <div class="cart-container" id="cartContainer">
+      <div class="cart-header">
+        <h2>From Saved Addresses</h2>
+      </div>
+      <div class="cart-items" id="cartItems">
+        <!-- Cart items will be dynamically inserted here -->
+      </div>
+    </div>
+    <div class="price-details">
+      <h3>PRICE DETAILS</h3>
+      <div class="price-item">
+        <span>Price (4 items)</span>
+        <span id="totalPrice">$0.00</span>
+      </div>
+      <div class="price-item">
+        <span>Discount</span>
+        <span id="totalDiscount">-$0.00</span>
+      </div>
+      <div class="price-item">
+        <span>Delivery Charges</span>
+        <span id="deliveryCharges">Free</span>
+      </div>
+      <div class="price-item">
+        <span>Secured Packaging Fee</span>
+        <span id="packagingFee">$0.00</span>
+      </div>
+      <div class="price-item total">
+        <span>Total Amount</span>
+        <span id="totalAmount">$0.00</span>
+      </div>
+      <div class="savings">
+        <span>You will save $0.00 on this order</span>
+      </div>
+      <button class="place-order-btn" onclick="placeOrder()">PLACE ORDER</button>
+    </div>
+  </div>
+  <script>
+    const cartItems = [
+  {
+    id: 1,
+    name: "SAMSUNG Galaxy S23 5G (Cream, 128 GB)",
+    image: "https://rukminim2.flixcart.com/image/224/224/xif0q/mobile/x/7/n/-original-imagzm8qzhpuwrak.jpeg?q=90",
+    discountPrice: 43999,
+    originalPrice: 89999,
+    packagingFee: 99,
+    quantity: 1
+  },
+  {
+    id: 2,
+    name: "Product 2",
+    image: "https://rukminim2.flixcart.com/image/224/224/xif0q/mobile/x/7/n/-original-imagzm8qzhpuwrak.jpeg?q=90",
+    discountPrice: 30000,
+    originalPrice: 60000,
+    packagingFee: 99,
+    quantity: 1
+  }
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+  displayCartItems();
+  calculateSummary();
+});
+
+function displayCartItems() {
+  const cartItemsContainer = document.getElementById('cartItems');
+  cartItemsContainer.innerHTML = '';
+  cartItems.forEach(item => {
+    const cartItemElement = document.createElement('div');
+    cartItemElement.classList.add('cart-item');
+    cartItemElement.innerHTML = `
+      <img src="${item.image}" alt="${item.name}">
+      <div class="cart-item-details">
+        <h4>${item.name}</h4>
+        <p><span class="original-price">₹${item.originalPrice.toLocaleString()}</span> <span class="discount-price">₹${item.discountPrice.toLocaleString()}</span></p>
+        <p>Secured Packaging Fee: ₹${item.packagingFee}</p>
+        <div class="cart-item-quantity">
+          <div class="quantity-controls">
+            <button onclick="decreaseQuantity(${item.id})">-</button>
+            <input type="text" value="${item.quantity}" readonly>
+            <button onclick="increaseQuantity(${item.id})">+</button>
+          </div>
+        </div>
+      </div>
+    `;
+    cartItemsContainer.appendChild(cartItemElement);
+  });
+}
+
+function calculateSummary() {
+  let totalPrice = 0;
+  let totalDiscount = 0;
+  let totalPackagingFee = 0;
+
+  cartItems.forEach(item => {
+    totalPrice += item.discountPrice * item.quantity;
+    totalDiscount += (item.originalPrice - item.discountPrice) * item.quantity;
+    totalPackagingFee += item.packagingFee * item.quantity;
+  });
+
+  document.getElementById('totalPrice').innerText = `₹${(totalPrice + totalDiscount).toLocaleString()}`;
+  document.getElementById('totalDiscount').innerText = `-₹${totalDiscount.toLocaleString()}`;
+  document.getElementById('totalAmount').innerText = `₹${(totalPrice + totalPackagingFee).toLocaleString()}`;
+  document.getElementById('packagingFee').innerText = `₹${totalPackagingFee.toLocaleString()}`;
+  document.querySelector('.savings span').innerText = `You will save ₹${totalDiscount.toLocaleString()} on this order`;
+}
+
+function increaseQuantity(id) {
+  const item = cartItems.find(item => item.id === id);
+  item.quantity++;
+  displayCartItems();
+  calculateSummary();
+}
+
+function decreaseQuantity(id) {
+  const item = cartItems.find(item => item.id === id);
+  if (item.quantity > 1) {
+    item.quantity--;
+    displayCartItems();
+    calculateSummary();
+  }
+}
+
+function placeOrder() {
+  alert('Order placed successfully!');
+}
+
+  </script>
+</body>
+</html>
